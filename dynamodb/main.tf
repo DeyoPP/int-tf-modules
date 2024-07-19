@@ -3,7 +3,7 @@ module "meta" {
   meta   = var.meta
 }
 
-module "dynamodb-table" {
+module "dynamodb-tablee" {
   source  = "terraform-aws-modules/dynamodb-table/aws"
   version = "3.3.0"
 
