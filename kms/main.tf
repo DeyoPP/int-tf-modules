@@ -4,7 +4,6 @@ module "meta" {
 }
 
 module "kms" {
-  source  = "terraform-aws-modules/kms/aws"
-  version = "3.1.0"
+  source  = "github.com/terraform-aws-modules/terraform-aws-kms?ref=fe1beca"
 }
 
