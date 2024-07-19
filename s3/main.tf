@@ -3,9 +3,11 @@ module "meta" {
   meta   = var.meta
 }
 
-
 module "bucket" {
-  source = "github.com/terraform-aws-modules/terraform-aws-s3-bucket?ref=8a0b697adfbc673e6135c70246cff7f8052ad95a"
+  source  = "terraform-aws-modules/s3-bucket/aws"
+  version = "3.3.0"
+
+
 
   bucket = var.bucket_name == "" ? module.meta.name : var.bucket_name
   acl    = var.acl
@@ -18,21 +20,20 @@ module "bucket" {
   attach_policy            = var.attach_policy
   website                  = var.website
   cors_rule                = jsonencode(var.cors_rule)
-
-  policy = <<EOF
-{
-  "Version": "2012-10-17",
-  "Statement": [
-    {
-      "Sid": "AllowPublicRead",
-      "Effect": "Allow",
-      "Principal": {
-        "AWS": "*"
-      },
-      "Action": "s3:GetObject",
-      "Resource": "arn:aws:s3:::${module.meta.name}/*"
-    }
-  ]
+  policy                   = <<EOF
+  {
+    "Version": "2012-10-17",
+    "Statement": [
+        {
+            "Sid": "AllowPublicRead",
+            "Effect": "Allow",
+            "Principal": {
+                "AWS": "*"
+            },
+            "Action": "s3:GetObject",
+            "Resource": "arn:aws:s3:::${module.meta.name}/*"
+        }
+    ]
 }
 EOF
 }
