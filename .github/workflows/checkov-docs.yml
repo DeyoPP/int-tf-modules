@@ -5,11 +5,6 @@ on:
     branches:
       - main
 
-permissions:
-  contents: write  # Allow the workflow to push changes to the repository
-  id-token: read    # Allow the workflow to request an OIDC token
-  pull-requests: write  # Allow the workflow to create and update pull requests
-
 jobs:
   checkov:
     name: Run Checkov
@@ -60,7 +55,7 @@ jobs:
           git commit -m "Update Terraform documentation [skip ci]"
 
       - name: Pull Remote Changes
-        run: git pull --rebase origin "${{ github.event.pull_request.head.ref }}"
+        run: git pull --rebase origin ${{ github.event.pull_request.head.ref }}
 
       - name: Push Documentation
-        run: git push origin "HEAD:${{ github.event.pull_request.head.ref }}"
+        run: git push origin HEAD:${{ github.event.pull_request.head.ref }} 
