@@ -78,6 +78,8 @@ jobs:
       - name: Commit and push documentation
         if: steps.check_changes.outputs.push_changes == 'true'
         run: |
+          git config --global user.email "dejan.pelemis@cyberlab.rs"
+          git config --global user.name "Dejan"
           git add README.md
           git commit -m "docs: update documentation"
           git push --force
