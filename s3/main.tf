@@ -4,10 +4,7 @@ module "meta" {
 }
 
 module "bucket" {
-  source  = "github.com/terraform-aws-modules/terraform-aws-s3-bucket?ref=8a0b697"
-  version = "3.3.0"
-
-
+  source  = "github.com/terraform-aws-modules/terraform-aws-s3-bucket?ref=8a0b697adfbc673e6135c70246cff7f8052ad95a"
 
   bucket = var.bucket_name == "" ? module.meta.name : var.bucket_name
   acl    = var.acl
