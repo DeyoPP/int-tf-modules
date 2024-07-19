@@ -11,7 +11,6 @@ jobs:
     runs-on: ubuntu-latest
     permissions:
       contents: read
-      actions: read
 
     steps:
       - name: Checkout repository
@@ -26,14 +25,13 @@ jobs:
         run: pip install checkov
 
       - name: Run Checkov
-        run: checkov -d . --skip-check CKV_TF_1,CKV_TF_2
+        run: checkov -d . --skip-check CKV_TF_1, CKV_TF_2
 
   tf-docs:
     name: Generate Terraform Documentation
     runs-on: ubuntu-latest
     permissions:
       contents: write
-      actions: read
 
     steps:
       - name: Checkout repository
