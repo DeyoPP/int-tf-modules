@@ -5,6 +5,11 @@ on:
     branches:
       - main
 
+permissions:
+  contents: write
+  id-token: read
+  pull-requests: write
+
 jobs:
   checkov:
     name: Run Checkov
@@ -55,7 +60,7 @@ jobs:
           git commit -m "Update Terraform documentation [skip ci]"
 
       - name: Pull Remote Changes
-        run: git pull --rebase origin ${{ github.event.pull_request.head.ref }}
+        run: git pull --rebase origin "${{ github.event.pull_request.head.ref }}"
 
       - name: Push Documentation
-        run: git push origin HEAD:${{ github.event.pull_request.head.ref }}
+        run: git push origin "HEAD:${{ github.event.pull_request.head.ref }}"
