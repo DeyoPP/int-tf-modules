@@ -6,9 +6,9 @@ on:
       - main
 
 permissions:
-  contents: write
-  id-token: read
-  pull-requests: write
+  contents: write  # Allow the workflow to push changes to the repository
+  id-token: read    # Allow the workflow to request an OIDC token
+  pull-requests: write  # Allow the workflow to create and update pull requests
 
 jobs:
   checkov:
