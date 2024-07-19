@@ -11,7 +11,7 @@ No providers.
 
 | Name | Source | Version |
 |------|--------|---------|
-| <a name="module_kms"></a> [kms](#module\_kms) | terraform-aws-modules/kms/aws | 3.1.0 |
+| <a name="module_kmss"></a> [kmss](#module\_kmss) | terraform-aws-modules/kms/aws | 3.1.0 |
 | <a name="module_meta"></a> [meta](#module\_meta) | ../meta | n/a |
 
 ## Resources

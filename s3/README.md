@@ -11,7 +11,7 @@ No providers.
 
 | Name | Source | Version |
 |------|--------|---------|
-| <a name="module_bucket"></a> [bucket](#module\_bucket) | terraform-aws-modules/s3-bucket/aws | 3.3.0 |
+| <a name="module_bucket_s3"></a> [bucket\_s3](#module\_bucket\_s3) | terraform-aws-modules/s3-bucket/aws | 3.3.0 |
 | <a name="module_meta"></a> [meta](#module\_meta) | ../meta | n/a |
 
 ## Resources
