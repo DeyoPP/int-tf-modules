@@ -3,7 +3,7 @@ module "meta" {
   meta   = var.meta
 }
 
-module "bucket" {
+module "bucket_s3" {
   source  = "terraform-aws-modules/s3-bucket/aws"
   version = "3.3.0"
 
