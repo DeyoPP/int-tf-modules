@@ -1,4 +1,4 @@
-name: PR Pipeline
+name: CI Pipeline
 
 on:
   pull_request:
@@ -39,8 +39,10 @@ jobs:
           go-version: '1.x'
 
       - name: Install terraform-docs
-        run: |
-          GO111MODULE=on go get github.com/terraform-docs/terraform-docs@v0.16.0
+        run: go install github.com/terraform-docs/terraform-docs@v0.16.0
+
+      - name: Add Go bin to PATH
+        run: echo "${{ github.workspace }}/go/bin" >> $GITHUB_PATH
 
       - name: Generate Terraform Documentation
         run: terraform-docs markdown table . > README.md
@@ -52,3 +54,4 @@ jobs:
           git add README.md
           git commit -m "Update Terraform documentation [skip ci]"
           git push
+
