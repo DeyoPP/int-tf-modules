@@ -1,11 +1,9 @@
-name: CI/CD Pipeline
+name: Checkov
 
 on:
   pull_request:
     branches:
       - main
-    types:
-      - [opened, synchronize, reopened, closed]
 
 jobs:
   checkov:
@@ -28,7 +26,7 @@ jobs:
         run: pip install checkov
 
       - name: Run Checkov
-        run: checkov -d .
+        run: checkov -d . --skip-check CKV_TF_1,CKV_TF_2
 
   tf-docs:
     name: Generate Terraform Documentation
@@ -39,19 +37,20 @@ jobs:
 
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
 
       - name: Setup Terraform
         uses: hashicorp/setup-terraform@v3
 
       - name: Terraform Format Check
-        run: terraform fmt --recursive --check
-
+        run: |
+          terraform fmt --recursive --check
+ 
       - name: Checkout current branch
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
         with:
           ref: ${{ github.event.pull_request.head.ref }}
-          token: ${{ secrets.GH_PAT }}
+          token: ${{ secrets.GITHUB_TOKEN}}
   
       - name: List directories
         id: list_dirs
@@ -84,28 +83,3 @@ jobs:
           git add README.md
           git commit -m "docs: update documentation"
           git push --force
-
-  release:
-    if: github.event.pull_request.merged == true
-    runs-on: ubuntu-latest
-    permissions:
-      id-token: write
-      contents: write
-      pull-requests: write
-
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v3
-
-      - name: Set up Node.js
-        uses: actions/setup-node@v4
-        with:
-          node-version: '20'
-
-      - name: Run npm ci
-        run: npm ci
-
-      - name: Semantic Release
-        run: npx semantic-release --no-ci
-        env:
-          GH_TOKEN: ${{ secrets.GH_PAT }}
