@@ -1,0 +1,83 @@
+name: Checkov
+
+on:
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  checkov:
+    name: Run Checkov
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      actions: read
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.x'
+
+      - name: Install Checkov
+        run: pip install checkov
+
+      - name: Run Checkov
+        run: checkov -d . --skip-check CKV_TF_1,CKV_TF_2
+
+  tf-docs:
+    name: Generate Terraform Documentation
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+      actions: read
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup Terraform
+        uses: hashicorp/setup-terraform@v3
+
+      - name: Terraform Format Check
+        run: |
+          terraform fmt --recursive --check
+ 
+      - name: Checkout current branch
+        uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event.pull_request.head.ref }}
+          token: ${{ secrets.GITHUB_TOKEN}}
+  
+      - name: List directories
+        id: list_dirs
+        run: |
+          echo "::set-output name=dirs::$(find . -name '*.tf' -exec dirname {} \; | paste -sd , -)"
+      
+      - name: Render terraform docs and push changes
+        uses: terraform-docs/gh-actions@v1.0.0
+        with:
+          working-dir: ${{ steps.list_dirs.outputs.dirs }}
+          output-file: README.md
+          output-method: inject
+          git-push: "false"
+  
+      - name: Check if changes exist
+        run: |
+          if [[ -z $(git status -s) ]]; then
+            echo "No changes to commit. Skipping push."
+            echo "::set-output name=push_changes::false"
+          else
+            echo "::set-output name=push_changes::true"
+          fi
+        id: check_changes
+
+      - name: Commit and push documentation
+        if: steps.check_changes.outputs.push_changes == 'true'
+        run: |
+          git add README.md
+          git commit -m "docs: update documentation"
+          git push --force
