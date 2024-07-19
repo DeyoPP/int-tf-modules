@@ -37,38 +37,47 @@ jobs:
 
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
 
-      - name: Set up Go
-        uses: actions/setup-go@v4
+      - name: Setup Terraform
+        uses: hashicorp/setup-terraform@v3
+
+      - name: Terraform Format Check
+        run: |
+          terraform fmt --recursive --check
+ 
+      - name: Checkout current branch
+        uses: actions/checkout@v4
         with:
-          go-version: '1.x'
-
-      - name: Install terraform-docs
-        run: go install github.com/terraform-docs/terraform-docs@v0.16.0
-
-      - name: Add Go bin to PATH
-        run: echo "${{ github.workspace }}/go/bin" >> $GITHUB_PATH
-
-      - name: Generate Terraform Documentation
-        run: terraform-docs markdown table . > README.md
-
-      - name: Pull Remote Changes
-        env:
-          REF: ${{ github.event.pull_request.head.ref }}
+          ref: ${{ github.event.pull_request.head.ref }}
+          token: ${{ secrets.GITHUB_TOKEN}}
+  
+      - name: List directories
+        id: list_dirs
         run: |
-          git fetch origin "${REF}"
-          git rebase FETCH_HEAD
-
-      - name: Commit Documentation
+          echo "::set-output name=dirs::$(find . -name '*.tf' -exec dirname {} \; | paste -sd , -)"
+      
+      - name: Render terraform docs and push changes
+        uses: terraform-docs/gh-actions@v1.0.0
+        with:
+          working-dir: ${{ steps.list_dirs.outputs.dirs }}
+          output-file: README.md
+          output-method: inject
+          git-push: "false"
+  
+      - name: Check if changes exist
         run: |
-          git config --local user.name "github-actions[bot]"
-          git config --local user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          if [[ -z $(git status -s) ]]; then
+            echo "No changes to commit. Skipping push."
+            echo "::set-output name=push_changes::false"
+          else
+            echo "::set-output name=push_changes::true"
+          fi
+        id: check_changes
+
+      - name: Commit and push documentation
+        if: steps.check_changes.outputs.push_changes == 'true'
+        run: |
           git add README.md
-          git commit -m "Update Terraform documentation [skip ci]"
-
-      - name: Push Documentation
-        env:
-          REF: ${{ github.event.pull_request.head.ref }}
-        run: |
-          git push origin "HEAD:${REF}"
+          git commit -m "docs: update documentation"
+          git push --force
