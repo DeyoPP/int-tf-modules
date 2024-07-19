@@ -31,4 +31,4 @@ jobs:
       - name: Semantic Release
         run: npx semantic-release --no-ci
         env:
-          GH_TOKEN: ${{ secrets.TOKEN }}
+          GH_TOKEN: ${{ secrets.GH_PAT }}
