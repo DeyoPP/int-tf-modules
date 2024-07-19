@@ -28,7 +28,6 @@ jobs:
       - name: Run Checkov
         run: checkov -d . --skip-check CKV_TF_1,CKV_TF_2
 
-
   tf-docs:
     name: Generate Terraform Documentation
     runs-on: ubuntu-latest
@@ -63,9 +62,13 @@ jobs:
 
       - name: Pull Remote Changes
         run: |
-          git fetch origin ${{ github.event.pull_request.head.ref }}
+          ref=${{ github.event.pull_request.head.ref }}
+          git fetch origin "$ref"
           git rebase FETCH_HEAD
 
       - name: Push Documentation
         run: |
-          git push origin HEAD:${{ github.event.pull_request.head.ref }}
+          ref=${{ github.event.pull_request.head.ref }}
+          git push origin "HEAD:$ref"
+
+
