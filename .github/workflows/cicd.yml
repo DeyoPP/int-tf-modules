@@ -6,7 +6,6 @@ on:
       - main
     types:
       - [opened, synchronize, reopened, closed]
-  workflow_dispatch:
 
 jobs:
   checkov:
