@@ -5,7 +5,7 @@ module "meta" {
 
 
 
-module "kmss" {
+module "kms" {
   source  = "terraform-aws-modules/kms/aws"
   version = "3.1.0"
 }
