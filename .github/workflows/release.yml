@@ -6,14 +6,14 @@ on:
       - main
     types:
       - closed
-
+permissions: read-all    
 jobs:
   release:
     if: github.event.pull_request.merged == true
     runs-on: ubuntu-latest
     permissions:
-      contents: write #checkov:skip=CKV2_GHA_1
-      pull-requests: write #checkov:skip=CKV2_GHA_1
+      contents: write
+      pull-requests: write
 
 
     steps:

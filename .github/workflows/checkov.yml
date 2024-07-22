@@ -4,13 +4,13 @@ on:
   pull_request:
     branches:
       - main
-
+permissions: read-all   
 jobs:
   checkov:
     name: Run Checkov
     runs-on: ubuntu-latest
     permissions:
-      contents: read #checkov:skip=CKV2_GHA_1
+      contents: read
 
     steps:
       - name: Checkout repository
@@ -31,7 +31,7 @@ jobs:
     name: Generate Terraform Documentation
     runs-on: ubuntu-latest
     permissions:
-      contents: write #checkov:skip=CKV2_GHA_1
+      contents: write
 
     steps:
       - name: Checkout repository
