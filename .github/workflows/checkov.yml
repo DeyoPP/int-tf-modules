@@ -1,4 +1,3 @@
-#checkov:skip=CKV2_GHA_1: "Ensure top-level permissions are not set to write-all. They need to be write all."
 name: Checkov
 
 on:
@@ -11,7 +10,7 @@ jobs:
     name: Run Checkov
     runs-on: ubuntu-latest
     permissions:
-      contents: read
+      contents: read #checkov:skip=CKV2_GHA_1 "Ensure top-level permissions are not set to write-all. They need to be write all."
 
     steps:
       - name: Checkout repository
