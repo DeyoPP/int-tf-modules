@@ -6,10 +6,7 @@ module "meta" {
 
 
 module "kms" {
-  #checkov:skip=CKV_TF_1: "Commit hash"
-  #checkov:skip=CKV_TF_2: "Problem 2"
-  source  = "terraform-aws-modules/kms/aws"
-  version = "3.1.0"
+  source  = "git::https://github.com/terraform-aws-modules/terraform-aws-kms?ref=fe1beca2118c0cb528526e022a53381535bb93cd"
 }
 
 
