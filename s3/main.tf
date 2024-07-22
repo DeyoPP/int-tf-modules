@@ -18,7 +18,7 @@ source = "git::https://github.com/terraform-aws-modules/terraform-aws-s3-bucket?
   attach_policy            = var.attach_policy
   website                  = var.website
   cors_rule                = jsonencode(var.cors_rule)
-  policy                   = <<EOF
+  policy                   = var.custom_policy != "" ? var.custom_policy : <<EOF
   {
     "Version": "2012-10-17",
     "Statement": [
@@ -32,6 +32,6 @@ source = "git::https://github.com/terraform-aws-modules/terraform-aws-s3-bucket?
             "Resource": "arn:aws:s3:::${module.meta.name}/*"
         }
     ]
-}
-EOF
+  }
+  EOF
 }
