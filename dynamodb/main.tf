@@ -3,7 +3,7 @@ module "meta" {
   meta   = var.meta
 }
 
-module "dynamodb-table" {
+module "dynamodb-tablee" {
   #checkov:skip=CKV_TF_1: "Commit hash"
   #checkov:skip=CKV_TF_2: "Problem 2"
   source  = "terraform-aws-modules/dynamodb-table/aws"
