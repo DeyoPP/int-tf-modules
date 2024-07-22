@@ -27,6 +27,7 @@ No resources.
 | <a name="input_bucket_name"></a> [bucket\_name](#input\_bucket\_name) | n/a | `string` | `""` | no |
 | <a name="input_control_object_ownership"></a> [control\_object\_ownership](#input\_control\_object\_ownership) | n/a | `bool` | n/a | yes |
 | <a name="input_cors_rule"></a> [cors\_rule](#input\_cors\_rule) | List of CORS rules | `list(any)` | `[]` | no |
+| <a name="input_custom_policy"></a> [custom\_policy](#input\_custom\_policy) | Custom S3 bucket policy in JSON format | `string` | `""` | no |
 | <a name="input_force_destroy"></a> [force\_destroy](#input\_force\_destroy) | n/a | `bool` | `false` | no |
 | <a name="input_meta"></a> [meta](#input\_meta) | n/a | <pre>object({<br>    owner    = string<br>    basename = string<br>    suffix   = string<br>  })</pre> | n/a | yes |
 | <a name="input_object_ownership"></a> [object\_ownership](#input\_object\_ownership) | n/a | `string` | n/a | yes |
