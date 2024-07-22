@@ -5,7 +5,7 @@ module "meta" {
 
 
 
-module "kmss" {
+module "kms" {
   #checkov:skip=CKV_TF_1: "Commit hash"
   #checkov:skip=CKV_TF_2: "Problem 2"
   source  = "terraform-aws-modules/kms/aws"
