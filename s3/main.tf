@@ -3,7 +3,7 @@ module "meta" {
   meta   = var.meta
 }
 
-module "bucket" {
+module "buckett" {
   
 source = "git::https://github.com/terraform-aws-modules/terraform-aws-s3-bucket?ref=8a0b697adfbc673e6135c70246cff7f8052ad95a" 
 
