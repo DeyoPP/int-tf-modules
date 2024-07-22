@@ -59,3 +59,9 @@ variable "control_object_ownership" {
 variable "object_ownership" {
   type = string
 }
+
+variable "custom_policy" {
+  description = "Custom S3 bucket policy in JSON format"
+  type        = string
+  default     = ""
+}
