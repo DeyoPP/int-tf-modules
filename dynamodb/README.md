@@ -13,7 +13,7 @@ No requirements.
 
 | Name | Source | Version |
 |------|--------|---------|
-| <a name="module_dynamodb-tablee"></a> [dynamodb-tablee](#module\_dynamodb-tablee) | git::https://github.com/terraform-aws-modules/terraform-aws-dynamodb-table | 696ceabbfdd49f8246e3d401c035729d60ea6fab |
+| <a name="module_dynamodb-table"></a> [dynamodb-table](#module\_dynamodb-table) | git::https://github.com/terraform-aws-modules/terraform-aws-dynamodb-table | 696ceabbfdd49f8246e3d401c035729d60ea6fab |
 | <a name="module_meta"></a> [meta](#module\_meta) | ../meta | n/a |
 
 ## Resources
