@@ -12,8 +12,8 @@ jobs:
     if: github.event.pull_request.merged == true
     runs-on: ubuntu-latest
     permissions:
-      contents: write #checkov:skip=CKV2_GHA_1 "Ensure top-level permissions are not set to write-all. They need to be write all."
-      pull-requests: write #checkov:skip=CKV2_GHA_1 "Ensure top-level permissions are not set to write-all. They need to be write all."
+      contents: write #checkov:skip=CKV2_GHA_1
+      pull-requests: write #checkov:skip=CKV2_GHA_1
 
 
     steps:

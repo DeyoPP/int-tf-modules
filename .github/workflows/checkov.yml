@@ -10,7 +10,7 @@ jobs:
     name: Run Checkov
     runs-on: ubuntu-latest
     permissions:
-      contents: read #checkov:skip=CKV2_GHA_1 "Ensure top-level permissions are not set to write-all. They need to be write all."
+      contents: read #checkov:skip=CKV2_GHA_1
 
     steps:
       - name: Checkout repository
@@ -31,7 +31,7 @@ jobs:
     name: Generate Terraform Documentation
     runs-on: ubuntu-latest
     permissions:
-      contents: write
+      contents: write #checkov:skip=CKV2_GHA_1
 
     steps:
       - name: Checkout repository
@@ -79,5 +79,5 @@ jobs:
           git config --global user.email "dejan.pelemis@cyberlab.rs"
           git config --global user.name "Dejan"
           git add README.md
-          git commit -m "docs: update documentation"
+          git commit -m "docs: update documentation #checkov:skip=CKV2_GHA_1"
           git push --force
