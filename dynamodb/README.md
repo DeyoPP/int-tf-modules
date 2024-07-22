@@ -13,7 +13,7 @@ No requirements.
 
 | Name | Source | Version |
 |------|--------|---------|
-| <a name="module_dynamodb-tablee"></a> [dynamodb-tablee](#module\_dynamodb-tablee) | terraform-aws-modules/dynamodb-table/aws | 3.3.0 |
+| <a name="module_dynamodb-table"></a> [dynamodb-table](#module\_dynamodb-table) | terraform-aws-modules/dynamodb-table/aws | 3.3.0 |
 | <a name="module_meta"></a> [meta](#module\_meta) | ../meta | n/a |
 
 ## Resources
