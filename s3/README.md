@@ -11,7 +11,7 @@ No providers.
 
 | Name | Source | Version |
 |------|--------|---------|
-| <a name="module_bucket"></a> [bucket](#module\_bucket) | terraform-aws-modules/s3-bucket/aws | 3.3.0 |
+| <a name="module_bucket"></a> [bucket](#module\_bucket) | git::https://github.com/terraform-aws-modules/terraform-aws-s3-bucket | 8a0b697adfbc673e6135c70246cff7f8052ad95a |
 | <a name="module_meta"></a> [meta](#module\_meta) | ../meta | n/a |
 
 ## Resources
