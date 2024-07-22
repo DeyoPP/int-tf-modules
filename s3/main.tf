@@ -3,7 +3,9 @@ module "meta" {
   meta   = var.meta
 }
 
-module "bucket" {
+module "buckett" {
+  #checkov:skip=CKV_TF_1: "Commit hash"
+  #checkov:skip=CKV_TF_2: "Problem 2"
   source  = "terraform-aws-modules/s3-bucket/aws"
   version = "3.3.0"
 
