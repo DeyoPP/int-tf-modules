@@ -1,7 +1,7 @@
 module "dynamodb-table" {
   source  = "git::https://github.com/terraform-aws-modules/terraform-aws-dynamodb-table?ref=696ceabbfdd49f8246e3d401c035729d60ea6fab"
 
-
+  attributes                  = var.attributes
   name                        = var.name
   billing_mode                = var.billing_mode
   hash_key                    = var.hash_key
