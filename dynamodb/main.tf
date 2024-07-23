@@ -12,10 +12,8 @@ module "dynamodb-table" {
   stream_view_type            = var.stream_view_type
   table_class                 = var.table_class
   deletion_protection_enabled = var.deletion_protection_enabled
-
-  ttl {
-    enabled        = var.ttl_enabled
-    attribute_name = var.ttl_attribute_name
-  }
+  ttl_enabled                 = var.ttl_enabled
+  ttl_attribute_name          = var.ttl_attribute_name
+  
 
 }
