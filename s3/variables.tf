@@ -1,11 +1,3 @@
-variable "meta" {
-  type = object({
-    owner    = string
-    basename = string
-    suffix   = string
-  })
-}
-
 variable "region" {
   type    = string
   default = ""

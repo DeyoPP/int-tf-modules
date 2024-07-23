@@ -1,11 +1,3 @@
-variable "meta" {
-  type = object({
-    owner    = string
-    basename = string
-    suffix   = string
-  })
-}
-
 variable "bypass_policy_lockout_safety_check" {
   description = "A flag to indicate whether to bypass the key policy lockout safety check. Setting this value to true increases the risk that the KMS key becomes unmanageable"
   type        = bool

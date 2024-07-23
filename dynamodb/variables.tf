@@ -1,11 +1,3 @@
-variable "meta" {
-  type = object({
-    owner    = string
-    basename = string
-    suffix   = string
-  })
-}
-
 variable "read_capacity" {
   description = "The number of read units for this table. If the billing_mode is PROVISIONED, this field should be greater than"
   type        = number
