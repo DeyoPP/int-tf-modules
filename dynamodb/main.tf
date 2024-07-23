@@ -27,9 +27,9 @@ module "dynamodb-table" {
 
   stream_view_type = var.stream_view_type
 
-  ttl_attribute_name = var.ttl.attribute_name
+  ttl_attribute_name = var.ttl_attribute_name
 
-  ttl_enabled = var.ttl.enabled
+  ttl_enabled = var.ttl_enabled
 }
 
 resource "aws_lambda_event_source_mapping" "lambda" {

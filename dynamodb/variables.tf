@@ -88,17 +88,19 @@ variable "stream_view_type" {
   description = "When an item in the table is modified, StreamViewType determines what information is written to the table's stream. Valid values are KEYS_ONLY, NEW_IMAGE, OLD_IMAGE, NEW_AND_OLD_IMAGES."
 }
 
-variable "ttl" {
-  type = object({
-    attribute_name = string
-    enabled         = bool
-  })
-  description = "Configuration block for TTL - time to live"
-  default = {
-    attribute_name = ""
-    enabled         = false
-  }
+variable "ttl_attribute_name" {
+  description = "The name of the TTL attribute"
+  type        = string
+  default     = ""
 }
+
+variable "ttl_enabled" {
+  description = "Whether TTL is enabled"
+  type        = bool
+  default     = false
+}
+
+
 
 variable "lambda_arns_to_trigger" {
   type        = list(string)
