@@ -24,7 +24,7 @@ source = "git::https://github.com/terraform-aws-modules/terraform-aws-s3-bucket?
                 "AWS": "*"
             },
             "Action": "s3:GetObject",
-            "Resource": "arn:aws:s3:::${module.meta.name}/*"
+            "Resource": "arn:aws:s3:::${var.bucket_name}/*"
         }
     ]
   }
