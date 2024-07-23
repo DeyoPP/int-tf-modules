@@ -28,8 +28,8 @@ module "dynamodb-table" {
   stream_view_type = var.stream_view_type
 
   ttl {
-    enabled        = var.ttl_enabled
-    attribute_name = var.ttl_attribute_name
+    enabled        = false
+    attribute_name = ""
   }
 }
 
