@@ -1,12 +1,7 @@
-module "meta" {
-  source = "../meta"
-  meta   = var.meta
-}
-
 module "dynamodb-table" {
   source  = "git::https://github.com/terraform-aws-modules/terraform-aws-dynamodb-table?ref=696ceabbfdd49f8246e3d401c035729d60ea6fab"
 
-  name = var.table_name != "" ? var.table_name : module.meta.name
+  name = var.table_name
 
   autoscaling_enabled = var.autoscaling_enabled
 
