@@ -12,7 +12,6 @@ No providers.
 | Name | Source | Version |
 |------|--------|---------|
 | <a name="module_bucket"></a> [bucket](#module\_bucket) | git::https://github.com/terraform-aws-modules/terraform-aws-s3-bucket | 8a0b697adfbc673e6135c70246cff7f8052ad95a |
-| <a name="module_meta"></a> [meta](#module\_meta) | ../meta | n/a |
 
 ## Resources
 
@@ -29,7 +28,6 @@ No resources.
 | <a name="input_cors_rule"></a> [cors\_rule](#input\_cors\_rule) | List of CORS rules | `list(any)` | `[]` | no |
 | <a name="input_custom_policy"></a> [custom\_policy](#input\_custom\_policy) | Custom S3 bucket policy in JSON format | `string` | `""` | no |
 | <a name="input_force_destroy"></a> [force\_destroy](#input\_force\_destroy) | n/a | `bool` | `false` | no |
-| <a name="input_meta"></a> [meta](#input\_meta) | n/a | <pre>object({<br>    owner    = string<br>    basename = string<br>    suffix   = string<br>  })</pre> | n/a | yes |
 | <a name="input_object_ownership"></a> [object\_ownership](#input\_object\_ownership) | n/a | `string` | n/a | yes |
 | <a name="input_policy"></a> [policy](#input\_policy) | n/a | `string` | `""` | no |
 | <a name="input_region"></a> [region](#input\_region) | n/a | `string` | `""` | no |
