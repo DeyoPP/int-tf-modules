@@ -89,10 +89,17 @@ variable "stream_view_type" {
 }
 
 variable "ttl" {
-  type        = any
+  type = object({
+    attribute_name = string
+    enabled         = bool
+  })
   description = "Configuration block for TTL - time to live"
-  default     = {}
+  default = {
+    attribute_name = ""
+    enabled         = false
+  }
 }
+
 
 variable "lambda_arns_to_trigger" {
   type        = list(string)
