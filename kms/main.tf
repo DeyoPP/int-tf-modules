@@ -10,6 +10,6 @@ module "kms" {
   is_enabled                         = var.is_enabled
   key_usage                          = var.key_usage
   multi_region                       = var.multi_region
-  policy                             = coalesce(var.policy, data.aws_iam_policy_document.this[0].json)
+  policy                             = var.policy
   rotation_period_in_days            = var.rotation_period_in_days
 }
