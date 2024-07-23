@@ -100,7 +100,6 @@ variable "ttl" {
   }
 }
 
-
 variable "lambda_arns_to_trigger" {
   type        = list(string)
   default     = []
