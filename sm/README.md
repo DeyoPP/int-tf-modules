@@ -5,9 +5,7 @@ No requirements.
 
 ## Providers
 
-| Name | Version |
-|------|---------|
-| <a name="provider_aws"></a> [aws](#provider\_aws) | n/a |
+No providers.
 
 ## Modules
 
@@ -15,9 +13,7 @@ No modules.
 
 ## Resources
 
-| Name | Type |
-|------|------|
-| [aws_secretsmanager_secret.example](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/secretsmanager_secret) | resource |
+No resources.
 
 ## Inputs
 
