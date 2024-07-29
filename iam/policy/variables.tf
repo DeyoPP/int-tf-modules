@@ -7,12 +7,9 @@ variable "env" {
   })
 }
 
-variable "meta" {
-  type = object({
-    owner    = string
-    basename = string
-    suffix   = string
-  })
+variable "name" {
+  type    = string
+  default = ""
 }
 
 variable "create_policy" {

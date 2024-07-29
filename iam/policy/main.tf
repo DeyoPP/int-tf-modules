@@ -3,8 +3,8 @@ module "iam_policy" {
   
   create_policy = var.create_policy
 
-  name        = module.meta.name
-  description = "${module.meta.name} - provisioned by TF"
+  name        = var.name
+  description = "${var.name} - provisioned by TF"
   path        = var.path
   policy      = var.policy
 
