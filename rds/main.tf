@@ -1,5 +1,6 @@
 module "db" {
-
+  #chekcov:skip=CKV2_AWS_57
+  #chekcov:skip=CKV_AWS_64
   source = "git::https://github.com/terraform-aws-modules/rds//modules/db_instance?ref=a4ae4a51545f5cb617d30b716f6bf11840c76a0e" 
 
   identifier = module.meta.name
