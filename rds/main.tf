@@ -9,7 +9,7 @@ module "db" {
   instance_class              = "db.t3.micro"
   allocated_storage           = 5
   db_name                     = "postgres"
-  username                    = "fornul"
+  username                    = "deyo"
   manage_master_user_password = false
   password                    = random_password.master_password.result
   port                        = "5432"
