@@ -9,7 +9,9 @@ No providers.
 
 ## Modules
 
-No modules.
+| Name | Source | Version |
+|------|--------|---------|
+| <a name="module_assumable_role_with_oidc"></a> [assumable\_role\_with\_oidc](#module\_assumable\_role\_with\_oidc) | git::https://github.com/terraform-aws-modules/iam//modules/assumable-role-with-oidc | 88435a9dfab0b038fae753ae79dfa1a3bea01710 |
 
 ## Resources
 

@@ -24,7 +24,7 @@ No resources.
 | <a name="input_create_policy"></a> [create\_policy](#input\_create\_policy) | Whether to create the IAM policy | `bool` | `true` | no |
 | <a name="input_description"></a> [description](#input\_description) | The description of the policy | `string` | `"IAM Policy"` | no |
 | <a name="input_env"></a> [env](#input\_env) | Relevant environment metadata passed in by terragrunt by default | <pre>object({<br>    name       = string<br>    account_id = string<br>    region     = string<br>  })</pre> | n/a | yes |
-| <a name="input_meta"></a> [meta](#input\_meta) | n/a | <pre>object({<br>    owner    = string<br>    basename = string<br>    suffix   = string<br>  })</pre> | n/a | yes |
+| <a name="input_name"></a> [name](#input\_name) | n/a | `string` | `""` | no |
 | <a name="input_path"></a> [path](#input\_path) | The path of the policy in IAM | `string` | `"/"` | no |
 | <a name="input_policy"></a> [policy](#input\_policy) | The path of the policy in IAM (tpl file) | `string` | `""` | no |
 | <a name="input_tags"></a> [tags](#input\_tags) | A map of tags to add to all resources. | `map(string)` | `{}` | no |
