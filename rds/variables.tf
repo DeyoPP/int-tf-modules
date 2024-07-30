@@ -1,9 +1,26 @@
-variable "meta" {
-  type = object({
-    owner    = string
-    basename = string
-    suffix   = string
-  })
+variable "db_identifier" {
+  description = "The identifier for the RDS instance."
+  type        = string
+}
+
+variable "sg_name" {
+  description = "The name of the security group."
+  type        = string
+}
+
+variable "owner" {
+  description = "The owner of the resource."
+  type        = string
+}
+
+variable "environment" {
+  description = "The environment of the resource."
+  type        = string
+}
+
+variable "secret_name" {
+  description = "The name of the secret in AWS Secrets Manager."
+  type        = string
 }
 
 variable "parameters" {
