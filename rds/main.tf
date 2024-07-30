@@ -3,7 +3,7 @@ module "db" {
   #chekcov:skip=CKV_AWS_64
   source = "git::https://github.com/terraform-aws-modules/rds//modules/db_instance?ref=a4ae4a51545f5cb617d30b716f6bf11840c76a0e" 
 
-  identifier = module.meta.name
+  identifier = var.db_identifier
 
   engine                      = "postgres"
   engine_version              = "14"
@@ -44,10 +44,9 @@ module "db" {
 module "security_group" {
   source = "git::https://github.com/terraform-aws-modules/terraform-aws-security-group?ref=20e107f1658bc5c8b23efce2e17406e74e6cbeae" 
 
-  name        = module.meta.name
+  name        = var.sg_name
   description = "Security group for PostgreSQL"
   vpc_id      = var.vpc_id
-
 
   ingress_with_cidr_blocks = [
     {
@@ -67,10 +66,9 @@ module "security_group" {
   ]
 
   tags = {
-    Owner       = module.meta.labels.basename
-    Environment = module.meta.labels.suffix
+    Owner       = var.owner
+    Environment = var.environment
   }
-
 }
 
 resource "aws_kms_key" "db_key" {
@@ -80,7 +78,7 @@ resource "aws_kms_key" "db_key" {
 }
 
 resource "aws_secretsmanager_secret" "password_secret" {
-  name                    = module.meta.name
+  name                    = var.secret_name
   recovery_window_in_days = 30
   kms_key_id              = aws_kms_key.db_key.id
 }
