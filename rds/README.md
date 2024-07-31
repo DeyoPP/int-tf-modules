@@ -14,7 +14,7 @@ No requirements.
 
 | Name | Source | Version |
 |------|--------|---------|
-| <a name="module_db"></a> [db](#module\_db) | git::https://github.com/terraform-aws-modules/rds//modules/db_instance | a4ae4a51545f5cb617d30b716f6bf11840c76a0e |
+| <a name="module_db"></a> [db](#module\_db) | terraform-aws-modules/rds/aws | n/a |
 | <a name="module_security_group"></a> [security\_group](#module\_security\_group) | git::https://github.com/terraform-aws-modules/terraform-aws-security-group | 20e107f1658bc5c8b23efce2e17406e74e6cbeae |
 
 ## Resources
