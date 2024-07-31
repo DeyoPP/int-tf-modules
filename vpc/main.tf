@@ -5,7 +5,7 @@ locals {
 module "vpc" {
   source  = "git::https://github.com/terraform-aws-modules/terraform-aws-vpc?ref=2e417ad0ce830893127476436179ef483485ae84"
 
-  name = module.meta.name
+  name = var.vpc_name
   cidr = var.cidr
 
   azs                           = ["${local.region}a", "${local.region}b"]
