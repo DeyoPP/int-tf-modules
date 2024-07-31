@@ -1,7 +1,6 @@
 module "db" {
-  #chekcov:skip=CKV2_AWS_57
-  #chekcov:skip=CKV_AWS_64
-  source = "git::https://github.com/terraform-aws-modules/rds//modules/db_instance?ref=a4ae4a51545f5cb617d30b716f6bf11840c76a0e" 
+  source  = "terraform-aws-modules/rds/aws"
+  version = "~> 6.1.1"
 
   identifier = var.db_identifier
 
@@ -10,7 +9,7 @@ module "db" {
   instance_class              = "db.t3.micro"
   allocated_storage           = 5
   db_name                     = "postgres"
-  username                    = "deyo"
+  username                    = "dejo"
   manage_master_user_password = false
   password                    = random_password.master_password.result
   port                        = "5432"
@@ -40,9 +39,9 @@ module "db" {
   options = var.options
 }
 
-
 module "security_group" {
-  source = "git::https://github.com/terraform-aws-modules/terraform-aws-security-group?ref=20e107f1658bc5c8b23efce2e17406e74e6cbeae" 
+  source  = "terraform-aws-modules/security-group/aws"
+  version = "~> 4.0"
 
   name        = var.sg_name
   description = "Security group for PostgreSQL"
@@ -66,8 +65,8 @@ module "security_group" {
   ]
 
   tags = {
-    Owner       = var.owner
-    Environment = var.environment
+    Owner       = var.owner_tag
+    Environment = var.environment_tag
   }
 }
 
