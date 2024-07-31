@@ -30,19 +30,19 @@ No requirements.
 
 | Name | Description | Type | Default | Required |
 |------|-------------|------|---------|:--------:|
-| <a name="input_additional_cidr_block"></a> [additional\_cidr\_block](#input\_additional\_cidr\_block) | Additional CIDR block for security group ingress | `string` | n/a | yes |
-| <a name="input_cidr_block"></a> [cidr\_block](#input\_cidr\_block) | The CIDR block for security group ingress | `string` | n/a | yes |
+| <a name="input_additional_cidr_block"></a> [additional\_cidr\_block](#input\_additional\_cidr\_block) | Additional Cidr block from which access will be allowed | `string` | n/a | yes |
+| <a name="input_cidr_block"></a> [cidr\_block](#input\_cidr\_block) | Cidr block from which access will be allowed | `string` | n/a | yes |
 | <a name="input_db_identifier"></a> [db\_identifier](#input\_db\_identifier) | The identifier for the DB instance | `string` | n/a | yes |
-| <a name="input_deletion_protection"></a> [deletion\_protection](#input\_deletion\_protection) | Whether deletion protection is enabled for the DB instance | `bool` | n/a | yes |
+| <a name="input_deletion_protection"></a> [deletion\_protection](#input\_deletion\_protection) | Protect db from being deleted | `bool` | `true` | no |
 | <a name="input_environment_tag"></a> [environment\_tag](#input\_environment\_tag) | The environment tag for resources | `string` | n/a | yes |
-| <a name="input_options"></a> [options](#input\_options) | The DB options | `map(string)` | n/a | yes |
+| <a name="input_options"></a> [options](#input\_options) | Database server options | `list(map(any))` | `[]` | no |
 | <a name="input_owner_tag"></a> [owner\_tag](#input\_owner\_tag) | The owner tag for resources | `string` | n/a | yes |
-| <a name="input_parameters"></a> [parameters](#input\_parameters) | The DB parameters | `map(string)` | n/a | yes |
-| <a name="input_password_special"></a> [password\_special](#input\_password\_special) | Whether the generated password should include special characters | `bool` | n/a | yes |
+| <a name="input_parameters"></a> [parameters](#input\_parameters) | Database parameters | `list(map(any))` | `[]` | no |
+| <a name="input_password_special"></a> [password\_special](#input\_password\_special) | Is password special | `bool` | `true` | no |
 | <a name="input_secret_name"></a> [secret\_name](#input\_secret\_name) | The name of the secrets manager secret | `string` | n/a | yes |
 | <a name="input_sg_name"></a> [sg\_name](#input\_sg\_name) | The name of the security group | `string` | n/a | yes |
-| <a name="input_subnet_ids"></a> [subnet\_ids](#input\_subnet\_ids) | A list of subnet IDs for the DB subnet group | `list(string)` | n/a | yes |
-| <a name="input_vpc_id"></a> [vpc\_id](#input\_vpc\_id) | The VPC ID where the security group will be created | `string` | n/a | yes |
+| <a name="input_subnet_ids"></a> [subnet\_ids](#input\_subnet\_ids) | List of subnet for database | `list(string)` | n/a | yes |
+| <a name="input_vpc_id"></a> [vpc\_id](#input\_vpc\_id) | VPC ID | `string` | n/a | yes |
 
 ## Outputs
 
