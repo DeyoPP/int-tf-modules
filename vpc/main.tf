@@ -33,7 +33,7 @@ module "vpc" {
   create_flow_log_cloudwatch_iam_role  = true
   flow_log_max_aggregation_interval    = 60
   vpc_flow_log_tags = {
-    Name = "${module.meta.name}-all-traffic"
+    Name = "${var.vpc_name}-all-traffic"
   }
 
   # required for service discovery
