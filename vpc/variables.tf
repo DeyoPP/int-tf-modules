@@ -4,6 +4,11 @@ variable "region" {
   type        = string
 }
 
+variable "vpc_name" {
+  description = "VPC name"
+  type        = string
+}
+
 variable "private_subnets" {
   description = "List of private subnets CIDR"
   type        = list(string)

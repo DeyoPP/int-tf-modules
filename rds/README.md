@@ -14,8 +14,8 @@ No requirements.
 
 | Name | Source | Version |
 |------|--------|---------|
-| <a name="module_db"></a> [db](#module\_db) | terraform-aws-modules/rds/aws | n/a |
-| <a name="module_security_group"></a> [security\_group](#module\_security\_group) | git::https://github.com/terraform-aws-modules/terraform-aws-security-group | 20e107f1658bc5c8b23efce2e17406e74e6cbeae |
+| <a name="module_db"></a> [db](#module\_db) | git::https://github.com/terraform-aws-modules/rds//modules/db_instance | a4ae4a51545f5cb617d30b716f6bf11840c76a0e |
+| <a name="module_security_group"></a> [security\_group](#module\_security\_group) | terraform-aws-modules/security-group/aws | ~> 4.0 |
 
 ## Resources
 
@@ -30,19 +30,19 @@ No requirements.
 
 | Name | Description | Type | Default | Required |
 |------|-------------|------|---------|:--------:|
-| <a name="input_additional_cidr_block"></a> [additional\_cidr\_block](#input\_additional\_cidr\_block) | Additional Cidr block from which access will be allowed | `string` | n/a | yes |
-| <a name="input_cidr_block"></a> [cidr\_block](#input\_cidr\_block) | Cidr block from which access will be allowed | `string` | n/a | yes |
-| <a name="input_db_identifier"></a> [db\_identifier](#input\_db\_identifier) | The identifier for the RDS instance. | `string` | n/a | yes |
-| <a name="input_deletion_protection"></a> [deletion\_protection](#input\_deletion\_protection) | Protect db from being deleted | `bool` | `true` | no |
-| <a name="input_environment"></a> [environment](#input\_environment) | The environment of the resource. | `string` | n/a | yes |
-| <a name="input_options"></a> [options](#input\_options) | Database server options | `list(map(any))` | `[]` | no |
-| <a name="input_owner"></a> [owner](#input\_owner) | The owner of the resource. | `string` | n/a | yes |
-| <a name="input_parameters"></a> [parameters](#input\_parameters) | Database parameters | `list(map(any))` | `[]` | no |
-| <a name="input_password_special"></a> [password\_special](#input\_password\_special) | Is password special | `bool` | `true` | no |
-| <a name="input_secret_name"></a> [secret\_name](#input\_secret\_name) | The name of the secret in AWS Secrets Manager. | `string` | n/a | yes |
-| <a name="input_sg_name"></a> [sg\_name](#input\_sg\_name) | The name of the security group. | `string` | n/a | yes |
-| <a name="input_subnet_ids"></a> [subnet\_ids](#input\_subnet\_ids) | List of subnet for database | `list(string)` | n/a | yes |
-| <a name="input_vpc_id"></a> [vpc\_id](#input\_vpc\_id) | VPC ID | `string` | n/a | yes |
+| <a name="input_additional_cidr_block"></a> [additional\_cidr\_block](#input\_additional\_cidr\_block) | Additional CIDR block for security group ingress | `string` | n/a | yes |
+| <a name="input_cidr_block"></a> [cidr\_block](#input\_cidr\_block) | The CIDR block for security group ingress | `string` | n/a | yes |
+| <a name="input_db_identifier"></a> [db\_identifier](#input\_db\_identifier) | The identifier for the DB instance | `string` | n/a | yes |
+| <a name="input_deletion_protection"></a> [deletion\_protection](#input\_deletion\_protection) | Whether deletion protection is enabled for the DB instance | `bool` | n/a | yes |
+| <a name="input_environment_tag"></a> [environment\_tag](#input\_environment\_tag) | The environment tag for resources | `string` | n/a | yes |
+| <a name="input_options"></a> [options](#input\_options) | The DB options | `map(string)` | n/a | yes |
+| <a name="input_owner_tag"></a> [owner\_tag](#input\_owner\_tag) | The owner tag for resources | `string` | n/a | yes |
+| <a name="input_parameters"></a> [parameters](#input\_parameters) | The DB parameters | `map(string)` | n/a | yes |
+| <a name="input_password_special"></a> [password\_special](#input\_password\_special) | Whether the generated password should include special characters | `bool` | n/a | yes |
+| <a name="input_secret_name"></a> [secret\_name](#input\_secret\_name) | The name of the secrets manager secret | `string` | n/a | yes |
+| <a name="input_sg_name"></a> [sg\_name](#input\_sg\_name) | The name of the security group | `string` | n/a | yes |
+| <a name="input_subnet_ids"></a> [subnet\_ids](#input\_subnet\_ids) | A list of subnet IDs for the DB subnet group | `list(string)` | n/a | yes |
+| <a name="input_vpc_id"></a> [vpc\_id](#input\_vpc\_id) | The VPC ID where the security group will be created | `string` | n/a | yes |
 
 ## Outputs
 

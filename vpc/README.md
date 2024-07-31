@@ -28,6 +28,7 @@ No resources.
 | <a name="input_public_subnets"></a> [public\_subnets](#input\_public\_subnets) | List of private subnets CIDR | `list(string)` | <pre>[<br>  "10.0.11.0/24",<br>  "10.0.12.0/24"<br>]</pre> | no |
 | <a name="input_region"></a> [region](#input\_region) | AWS region | `string` | n/a | yes |
 | <a name="input_single_nat_gateway"></a> [single\_nat\_gateway](#input\_single\_nat\_gateway) | Single NAT gateway | `bool` | `true` | no |
+| <a name="input_vpc_name"></a> [vpc\_name](#input\_vpc\_name) | VPC name | `string` | n/a | yes |
 
 ## Outputs
 
