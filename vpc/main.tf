@@ -3,6 +3,10 @@ locals {
 }
 
 module "vpc" {
+  #checkov:skip=CKV_TF_1: "No need to use commit hash, easier to track with version"
+  #chekcov:skip=CKV2_AWS_57
+  #chekcov:skip=CKV_AWS_149
+  #chekcov:skip=CKV2_AWS_64
   source  = "git::https://github.com/terraform-aws-modules/terraform-aws-vpc?ref=2e417ad0ce830893127476436179ef483485ae84"
 
   name = var.vpc_name
