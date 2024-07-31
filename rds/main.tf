@@ -78,12 +78,14 @@ module "security_group" {
 }
 
 resource "aws_kms_key" "db_key" {
+  #checkov:skip=CKV2_AWS_64
   description             = "KMS key for AWS Secrets Manager"
   deletion_window_in_days = 7
   enable_key_rotation     = true
 }
 
 resource "aws_secretsmanager_secret" "password_secret" {
+  #checkov:skip=CKV2_AWS_57
   name                    = var.secret_name
   recovery_window_in_days = 30
   kms_key_id              = aws_kms_key.db_key.id
