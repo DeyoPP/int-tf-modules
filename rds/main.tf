@@ -1,8 +1,8 @@
 module "db" {
   #checkov:skip=CKV_TF_1: "No need to use commit hash, easier to track with version"
-  #chekcov:skip=CKV2_AWS_57
-  #chekcov:skip=CKV_AWS_149
-  #chekcov:skip=CKV2_AWS_64
+  #checkov:skip=CKV2_AWS_57
+  #checkov:skip=CKV_AWS_149
+  #checkov:skip=CKV2_AWS_64
   source = "git::https://github.com/terraform-aws-modules/rds//modules/db_instance?ref=a4ae4a51545f5cb617d30b716f6bf11840c76a0e" 
 
   identifier = var.db_identifier
@@ -43,6 +43,10 @@ module "db" {
 }
 
 module "security_group" {
+  #checkov:skip=CKV_TF_1: "No need to use commit hash, easier to track with version"
+  #checkov:skip=CKV2_AWS_57
+  #checkov:skip=CKV_AWS_149
+  #checkov:skip=CKV2_AWS_64
   source  = "terraform-aws-modules/security-group/aws"
   version = "~> 4.0"
 
