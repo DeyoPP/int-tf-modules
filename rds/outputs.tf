@@ -6,11 +6,11 @@ output "db_password" {
 
 # Define output for database name and endpoint
 output "db_name" {
-  description = "The name of the DB."
+  description = "The name of the database"
   value = module.db.db_name
 }
 
 output "db_endpoint" {
-  description = "The DB endpoint."
+  description = "The database endpoint."
   value = module.db.endpoint
 }
