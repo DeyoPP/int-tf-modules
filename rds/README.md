@@ -23,7 +23,9 @@ No requirements.
 |------|------|
 | [aws_kms_key.db_key](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/kms_key) | resource |
 | [aws_secretsmanager_secret.password_secret](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/secretsmanager_secret) | resource |
+| [aws_secretsmanager_secret.username_secret](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/secretsmanager_secret) | resource |
 | [aws_secretsmanager_secret_version.password_secret_value](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/secretsmanager_secret_version) | resource |
+| [aws_secretsmanager_secret_version.username_secret_value](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/secretsmanager_secret_version) | resource |
 | [random_password.master_password](https://registry.terraform.io/providers/hashicorp/random/latest/docs/resources/password) | resource |
 
 ## Inputs
@@ -48,5 +50,7 @@ No requirements.
 
 | Name | Description |
 |------|-------------|
-| <a name="output_db_password"></a> [db\_password](#output\_db\_password) | The generated master password for the DB. |
+| <a name="output_db_endpoint"></a> [db\_endpoint](#output\_db\_endpoint) | The database endpoint. |
+| <a name="output_db_name"></a> [db\_name](#output\_db\_name) | The name of the database |
+| <a name="output_db_password"></a> [db\_password](#output\_db\_password) | n/a |
 <!-- END_TF_DOCS -->
