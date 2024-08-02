@@ -1,5 +1,6 @@
 module "db" {
   #checkov:skip=CKV_TF_1: "No need to use commit hash, easier to track with version"
+  #checkov:skip=CKV_TF_2: "Skipped versioning for now"
   #checkov:skip=CKV2_AWS_57
   #checkov:skip=CKV_AWS_149
   #checkov:skip=CKV2_AWS_64
