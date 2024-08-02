@@ -9,7 +9,9 @@ No providers.
 
 ## Modules
 
-No modules.
+| Name | Source | Version |
+|------|--------|---------|
+| <a name="module_cdn"></a> [cdn](#module\_cdn) | git::https://github.com/terraform-aws-modules/terraform-aws-cloudfront | a0f0506106a4c8815c1c32596e327763acbef2c2 |
 
 ## Resources
 
@@ -19,30 +21,17 @@ No resources.
 
 | Name | Description | Type | Default | Required |
 |------|-------------|------|---------|:--------:|
-| <a name="input_acm_certificate_arn"></a> [acm\_certificate\_arn](#input\_acm\_certificate\_arn) | n/a | `string` | n/a | yes |
-| <a name="input_aliases"></a> [aliases](#input\_aliases) | CNAME for our website | `list(string)` | n/a | yes |
-| <a name="input_cloudfront_default_certificate"></a> [cloudfront\_default\_certificate](#input\_cloudfront\_default\_certificate) | n/a | `bool` | n/a | yes |
-| <a name="input_compress"></a> [compress](#input\_compress) | n/a | `bool` | n/a | yes |
-| <a name="input_default_root_object"></a> [default\_root\_object](#input\_default\_root\_object) | n/a | `string` | n/a | yes |
-| <a name="input_enabled"></a> [enabled](#input\_enabled) | n/a | `bool` | n/a | yes |
-| <a name="input_forward"></a> [forward](#input\_forward) | n/a | `string` | n/a | yes |
-| <a name="input_meta"></a> [meta](#input\_meta) | n/a | <pre>object({<br>    owner    = string<br>    basename = string<br>    suffix   = string<br>  })</pre> | n/a | yes |
-| <a name="input_methods"></a> [methods](#input\_methods) | n/a | `list(string)` | n/a | yes |
-| <a name="input_name"></a> [name](#input\_name) | n/a | `string` | n/a | yes |
-| <a name="input_origin_id"></a> [origin\_id](#input\_origin\_id) | n/a | `string` | n/a | yes |
-| <a name="input_origin_id_www"></a> [origin\_id\_www](#input\_origin\_id\_www) | n/a | `string` | n/a | yes |
-| <a name="input_query_string"></a> [query\_string](#input\_query\_string) | n/a | `bool` | n/a | yes |
-| <a name="input_region"></a> [region](#input\_region) | AWS Region | `string` | n/a | yes |
-| <a name="input_restriction_type"></a> [restriction\_type](#input\_restriction\_type) | n/a | `string` | n/a | yes |
-| <a name="input_s3_endpoint"></a> [s3\_endpoint](#input\_s3\_endpoint) | n/a | `string` | n/a | yes |
-| <a name="input_s3_endpoint_www"></a> [s3\_endpoint\_www](#input\_s3\_endpoint\_www) | n/a | `string` | n/a | yes |
-| <a name="input_ssl_support_method"></a> [ssl\_support\_method](#input\_ssl\_support\_method) | n/a | `string` | n/a | yes |
-| <a name="input_type"></a> [type](#input\_type) | n/a | `string` | n/a | yes |
-| <a name="input_viewer_protocol_policy"></a> [viewer\_protocol\_policy](#input\_viewer\_protocol\_policy) | n/a | `string` | n/a | yes |
-| <a name="input_web_acl_id"></a> [web\_acl\_id](#input\_web\_acl\_id) | ACL ID of WAF | `string` | n/a | yes |
-| <a name="input_www_aliases"></a> [www\_aliases](#input\_www\_aliases) | CNAME for our website | `list(string)` | n/a | yes |
-| <a name="input_www_name"></a> [www\_name](#input\_www\_name) | n/a | `string` | n/a | yes |
-| <a name="input_zone_id"></a> [zone\_id](#input\_zone\_id) | n/a | `string` | n/a | yes |
+| <a name="input_cdn_aliases"></a> [cdn\_aliases](#input\_cdn\_aliases) | Aliases for the CloudFront distribution | `list(string)` | n/a | yes |
+| <a name="input_cdn_allowed_methods"></a> [cdn\_allowed\_methods](#input\_cdn\_allowed\_methods) | Allowed HTTP methods for the CloudFront distribution | `list(string)` | <pre>[<br>  "GET",<br>  "HEAD"<br>]</pre> | no |
+| <a name="input_cdn_cached_methods"></a> [cdn\_cached\_methods](#input\_cdn\_cached\_methods) | Cached HTTP methods for the CloudFront distribution | `list(string)` | <pre>[<br>  "GET",<br>  "HEAD"<br>]</pre> | no |
+| <a name="input_cdn_certificate_arn"></a> [cdn\_certificate\_arn](#input\_cdn\_certificate\_arn) | ARN of the ACM certificate for CloudFront | `string` | n/a | yes |
+| <a name="input_cdn_comment"></a> [cdn\_comment](#input\_cdn\_comment) | Comment for the CloudFront distribution | `string` | `""` | no |
+| <a name="input_cdn_enabled"></a> [cdn\_enabled](#input\_cdn\_enabled) | Enable or disable the CloudFront distribution | `bool` | `true` | no |
+| <a name="input_cdn_is_ipv6_enabled"></a> [cdn\_is\_ipv6\_enabled](#input\_cdn\_is\_ipv6\_enabled) | Enable or disable IPv6 for the CloudFront distribution | `bool` | `true` | no |
+| <a name="input_cdn_price_class"></a> [cdn\_price\_class](#input\_cdn\_price\_class) | Price class for the CloudFront distribution | `string` | `"PriceClass_100"` | no |
+| <a name="input_cdn_query_string"></a> [cdn\_query\_string](#input\_cdn\_query\_string) | Enable or disable caching based on query strings | `bool` | `false` | no |
+| <a name="input_cdn_s3_bucket_domain"></a> [cdn\_s3\_bucket\_domain](#input\_cdn\_s3\_bucket\_domain) | Domain name of the S3 bucket | `string` | n/a | yes |
+| <a name="input_cdn_viewer_protocol_policy"></a> [cdn\_viewer\_protocol\_policy](#input\_cdn\_viewer\_protocol\_policy) | Viewer protocol policy | `string` | `"redirect-to-https"` | no |
 
 ## Outputs
 
