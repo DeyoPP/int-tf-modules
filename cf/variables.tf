@@ -1,107 +1,97 @@
-variable "meta" {
-  type = object({
-    owner    = string
-    basename = string
-    suffix   = string
-  })
+variable "domain_name" {
+  description = "The domain name for the certificate."
+  type        = string
 }
 
 variable "aliases" {
-  description = "CNAME for our website"
-
-  type = list(string)
-}
-
-variable "region" {
-  description = "AWS Region"
-  type        = string
+  description = "A list of CNAMEs (aliases) to associate with the distribution."
+  type        = list(string)
 }
 
 variable "s3_endpoint" {
-  description = ""
-  type        = string
-}
-
-variable "web_acl_id" {
-  description = "ACL ID of WAF"
+  description = "The S3 endpoint for the CloudFront origin."
   type        = string
 }
 
 variable "origin_id" {
-  description = ""
+  description = "The ID of the origin."
   type        = string
+}
+
+variable "create_origin_access_control" {
+  description = "Flag to create an origin access control."
+  type        = bool
+  default     = true
 }
 
 variable "enabled" {
-  description = ""
+  description = "Flag to enable the CloudFront distribution."
   type        = bool
+  default     = true
 }
 
 variable "default_root_object" {
-  description = ""
+  description = "The default root object."
   type        = string
+  default     = "index.html"
+}
+
+variable "web_acl_id" {
+  description = "The ID of the AWS WAF WebACL."
+  type        = string
+  default     = ""
 }
 
 variable "viewer_protocol_policy" {
-  description = ""
+  description = "The viewer protocol policy for the default cache behavior."
   type        = string
+  default     = "redirect-to-https"
 }
 
 variable "compress" {
-  description = ""
+  description = "Flag to enable compression."
   type        = bool
+  default     = true
 }
 
 variable "methods" {
-  description = ""
+  description = "The allowed methods for the default cache behavior."
   type        = list(string)
+  default     = ["GET", "HEAD", "OPTIONS"]
 }
 
 variable "query_string" {
-  description = ""
+  description = "Flag to forward query strings."
   type        = bool
+  default     = false
 }
 
 variable "forward" {
-  description = ""
+  description = "The cookies to forward."
   type        = string
+  default     = "none"
 }
 
 variable "restriction_type" {
-  description = ""
+  description = "The restriction type for geo restriction."
   type        = string
+  default     = "none"
 }
 
 variable "acm_certificate_arn" {
-  description = ""
+  description = "The ARN of the ACM certificate."
   type        = string
+  default     = ""
 }
 
 variable "ssl_support_method" {
-  description = ""
+  description = "The SSL support method for the viewer certificate."
   type        = string
+  default     = "sni-only"
 }
 
 variable "cloudfront_default_certificate" {
-  description = ""
-  type        = bool
-}
-
-variable "zone_id" {
-  type = string
-}
-
-variable "name" {
-  type = string
-}
-
-variable "type" {
-  type = string
-}
-
-
-variable "create_origin_access_control" {
-  description = "Create origin access control"
+  description = "Flag to use the default CloudFront certificate."
   type        = bool
   default     = false
 }
