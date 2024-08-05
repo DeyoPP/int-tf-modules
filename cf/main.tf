@@ -38,6 +38,16 @@ resource "aws_acm_certificate_validation" "cert_validation" {
   validation_record_fqdns = [for record in aws_route53_record.cert_validation : record.fqdn]
 }
 
+resource "aws_cloudfront_origin_access_control" "oaci" {
+  count                             = var.create_origin_access_control ? 1 : 0
+  name                              = var.oaci_name
+  description                       = var.oaci_description
+  origin_access_control_origin_type = var.oaci_origin_type
+  signing_behavior                  = var.oaci_signing_behavior
+  signing_protocol                  = var.oaci_signing_protocol
+}
+
+
 resource "aws_cloudfront_distribution" "cf" {
 
   #checkov:skip=CKV_AWS_86
