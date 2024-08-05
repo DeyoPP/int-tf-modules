@@ -4,7 +4,7 @@ data "aws_route53_zone" "selected" {
 }
 
 resource "aws_acm_certificate" "cert" {
-  domain_name       = var.subdomain_name
+  domain_name       = var.domain_name
   validation_method = "DNS"
 
   lifecycle {
