@@ -8,6 +8,8 @@ resource "aws_acm_certificate" "cert" {
   provider         = aws.us-east
   domain_name      = var.domain_name
   validation_method = "DNS"
+
+  subject_alternative_names = var.aliases
   
   lifecycle {
     create_before_destroy = true
