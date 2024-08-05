@@ -48,9 +48,5 @@ No requirements.
 
 ## Outputs
 
-| Name | Description |
-|------|-------------|
-| <a name="output_db_endpoint"></a> [db\_endpoint](#output\_db\_endpoint) | The database endpoint. |
-| <a name="output_db_name"></a> [db\_name](#output\_db\_name) | The name of the database |
-| <a name="output_db_password"></a> [db\_password](#output\_db\_password) | n/a |
+No outputs.
 <!-- END_TF_DOCS -->
