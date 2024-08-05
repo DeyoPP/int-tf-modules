@@ -12,7 +12,7 @@ resource "aws_acm_certificate" "cert" {
   }
 
   tags = {
-    Name = "CloudFrontCert"
+    Name = "CloudFrontCertificate"
   }
 }
 
