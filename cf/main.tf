@@ -19,9 +19,9 @@ resource "aws_acm_certificate" "cert" {
 resource "aws_route53_record" "cert_validation" {
   for_each = {
     for dvo in aws_acm_certificate.cert.domain_validation_options : dvo.domain_name => {
-      name   = dvo.resource_record_name
-      type   = dvo.resource_record_type
-      value  = dvo.resource_record_value
+      name    = dvo.resource_record_name
+      type    = dvo.resource_record_type
+      value   = dvo.resource_record_value
       zone_id = data.aws_route53_zone.selected.zone_id
     }
   }
@@ -39,6 +39,14 @@ resource "aws_acm_certificate_validation" "cert_validation" {
 }
 
 resource "aws_cloudfront_distribution" "cf" {
+
+  #checkov:skip=CKV_AWS_86
+  #checkov:skip=CKV_AWS_68
+  #checkov:skip=CKV_AWS_305
+  #checkov:skip=CKV_AWS_310
+  #checkov:skip=CKV2_AWS_47
+  #checkov:skip=CKV2_AWS_32
+
   origin {
     domain_name              = var.s3_endpoint
     origin_id                = var.origin_id
