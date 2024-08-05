@@ -3,6 +3,12 @@ variable "domain_name" {
   type        = string
 }
 
+variable "subdomain_name" {
+  description = "The subdomain name for the ACM certificate."
+  type        = string
+}
+
+
 variable "s3_endpoint" {
   description = "The endpoint of the S3 bucket."
   type        = string
