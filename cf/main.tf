@@ -1,10 +1,11 @@
 data "aws_route53_zone" "selected" {
+  provider = aws.eu-central
   name         = var.domain_name
   private_zone = false
 }
 
 resource "aws_acm_certificate" "cert" {
-  provider         = aws[var.provider_alias]
+  provider         = aws.us-east
   domain_name      = var.domain_name
   validation_method = "DNS"
   
@@ -16,7 +17,10 @@ resource "aws_acm_certificate" "cert" {
     Name = "CloudFrontCertificate"
   }
 }
+
 resource "aws_route53_record" "cert_validation" {
+  provider = aws.eu-central
+
   for_each = {
     for dvo in aws_acm_certificate.cert.domain_validation_options : dvo.domain_name => {
       name    = dvo.resource_record_name
@@ -34,11 +38,14 @@ resource "aws_route53_record" "cert_validation" {
 }
 
 resource "aws_acm_certificate_validation" "cert_validation" {
+  provider = aws.us-east
+
   certificate_arn         = aws_acm_certificate.cert.arn
   validation_record_fqdns = [for record in aws_route53_record.cert_validation : record.fqdn]
 }
 
 resource "aws_cloudfront_origin_access_control" "oaci" {
+  provider = aws.eu-central
   count                             = var.create_origin_access_control ? 1 : 0
   name                              = var.oaci_name
   description                       = var.oaci_description
@@ -47,8 +54,8 @@ resource "aws_cloudfront_origin_access_control" "oaci" {
   signing_protocol                  = var.oaci_signing_protocol
 }
 
-
 resource "aws_cloudfront_distribution" "cf" {
+  provider = aws.eu-central
 
   #checkov:skip=CKV_AWS_86
   #checkov:skip=CKV_AWS_68
