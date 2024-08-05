@@ -104,3 +104,6 @@ variable "restriction_type" {
   type        = string
   default     = "none"
 }
+variable "provider_alias" {
+  type = string
+}
