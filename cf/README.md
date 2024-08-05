@@ -45,6 +45,7 @@ No modules.
 | <a name="input_query_string"></a> [query\_string](#input\_query\_string) | Whether to forward query strings to the origin. | `bool` | `false` | no |
 | <a name="input_restriction_type"></a> [restriction\_type](#input\_restriction\_type) | The restriction type for geo restrictions. | `string` | `"none"` | no |
 | <a name="input_s3_endpoint"></a> [s3\_endpoint](#input\_s3\_endpoint) | The endpoint of the S3 bucket. | `string` | n/a | yes |
+| <a name="input_subdomain_name"></a> [subdomain\_name](#input\_subdomain\_name) | The subdomain name for the ACM certificate. | `string` | n/a | yes |
 | <a name="input_viewer_protocol_policy"></a> [viewer\_protocol\_policy](#input\_viewer\_protocol\_policy) | The protocol policy for viewers. | `string` | `"redirect-to-https"` | no |
 | <a name="input_web_acl_id"></a> [web\_acl\_id](#input\_web\_acl\_id) | The ID of the Web ACL to associate with the CloudFront distribution. | `string` | `""` | no |
 
