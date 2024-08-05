@@ -14,9 +14,36 @@ variable "origin_id" {
 }
 
 variable "create_origin_access_control" {
-  description = "Flag to create origin access control."
+  description = "Boolean flag to determine whether to create an Origin Access Control."
   type        = bool
-  default     = true
+}
+
+variable "oaci_name" {
+  description = "The name of the Origin Access Control."
+  type        = string
+}
+
+variable "oaci_description" {
+  description = "The description for the Origin Access Control."
+  type        = string
+}
+
+variable "oaci_origin_type" {
+  description = "The origin type for the Origin Access Control. Set to 's3' for S3 origins."
+  type        = string
+  default     = "s3"
+}
+
+variable "oaci_signing_behavior" {
+  description = "The signing behavior for the Origin Access Control. Options are 'always' or 'never'."
+  type        = string
+  default     = "always"
+}
+
+variable "oaci_signing_protocol" {
+  description = "The signing protocol for the Origin Access Control. Options are 'sigv4' or 'sigv4-aws4auth'."
+  type        = string
+  default     = "sigv4"
 }
 
 variable "aliases" {
