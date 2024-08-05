@@ -105,5 +105,6 @@ variable "restriction_type" {
   default     = "none"
 }
 variable "provider_alias" {
+  description = "Provider alias for certificate."
   type = string
 }
