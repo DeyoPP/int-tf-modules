@@ -43,7 +43,6 @@ No modules.
 | <a name="input_oaci_signing_behavior"></a> [oaci\_signing\_behavior](#input\_oaci\_signing\_behavior) | The signing behavior for the Origin Access Control. Options are 'always' or 'never'. | `string` | `"always"` | no |
 | <a name="input_oaci_signing_protocol"></a> [oaci\_signing\_protocol](#input\_oaci\_signing\_protocol) | The signing protocol for the Origin Access Control. Options are 'sigv4' or 'sigv4-aws4auth'. | `string` | `"sigv4"` | no |
 | <a name="input_origin_id"></a> [origin\_id](#input\_origin\_id) | The ID for the CloudFront origin. | `string` | n/a | yes |
-| <a name="input_provider_alias"></a> [provider\_alias](#input\_provider\_alias) | Provider alias for certificate. | `string` | n/a | yes |
 | <a name="input_query_string"></a> [query\_string](#input\_query\_string) | Whether to forward query strings to the origin. | `bool` | `false` | no |
 | <a name="input_restriction_type"></a> [restriction\_type](#input\_restriction\_type) | The restriction type for geo restrictions. | `string` | `"none"` | no |
 | <a name="input_s3_endpoint"></a> [s3\_endpoint](#input\_s3\_endpoint) | The endpoint of the S3 bucket. | `string` | n/a | yes |
