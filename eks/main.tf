@@ -39,9 +39,9 @@ module "eks" {
     }
   }
 
-  node_security_group_tags = merge(var.tags, {
-    "karpenter.sh/discovery" = var.name
-  })
+#   node_security_group_tags = merge(var.tags, {
+#     "karpenter.sh/discovery" = var.name
+#   })
 
   tags = var.tags
 }
