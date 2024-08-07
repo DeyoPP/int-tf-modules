@@ -3,7 +3,6 @@ module "bucket" {
 source = "git::https://github.com/terraform-aws-modules/terraform-aws-s3-bucket?ref=8a0b697adfbc673e6135c70246cff7f8052ad95a" 
 
   bucket = var.bucket_name
-  acl    = var.acl
   versioning = {
     enabled = var.versioning_enabled
   }
@@ -24,7 +23,7 @@ source = "git::https://github.com/terraform-aws-modules/terraform-aws-s3-bucket?
                 "AWS": "*"
             },
             "Action": "s3:GetObject",
-            "Resource": "arn:aws:s3:::${module.meta.name}/*"
+            "Resource": "arn:aws:s3:::${var.bucket_name}/*"
         }
     ]
   }
