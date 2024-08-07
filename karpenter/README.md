@@ -9,7 +9,9 @@ No providers.
 
 ## Modules
 
-No modules.
+| Name | Source | Version |
+|------|--------|---------|
+| <a name="module_karpenter"></a> [karpenter](#module\_karpenter) | git::https://github.com/terraform-aws-modules/terraform-aws-eks//modules/karpenter | 5fe865e860c4cc8506c639f2e63bc25e21a31b37 |
 
 ## Resources
 
