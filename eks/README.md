@@ -21,20 +21,25 @@ No resources.
 
 | Name | Description | Type | Default | Required |
 |------|-------------|------|---------|:--------:|
-| <a name="input_ami_type"></a> [ami\_type](#input\_ami\_type) | The AMI type for the managed node group | `string` | `"AL2023_x86_64_STANDARD"` | no |
-| <a name="input_cluster_version"></a> [cluster\_version](#input\_cluster\_version) | The Kubernetes version for the EKS cluster | `string` | `"1.30"` | no |
-| <a name="input_desired_size"></a> [desired\_size](#input\_desired\_size) | Desired size of the managed node group | `number` | `1` | no |
-| <a name="input_instance_types"></a> [instance\_types](#input\_instance\_types) | Comma-separated list of instance types for the managed node group | `string` | `"t3.medium"` | no |
-| <a name="input_intra_subnets"></a> [intra\_subnets](#input\_intra\_subnets) | List of intra subnet IDs for the EKS cluster control plane | `list(string)` | n/a | yes |
-| <a name="input_max_size"></a> [max\_size](#input\_max\_size) | Maximum size of the managed node group | `number` | `3` | no |
-| <a name="input_min_size"></a> [min\_size](#input\_min\_size) | Minimum size of the managed node group | `number` | `1` | no |
-| <a name="input_name"></a> [name](#input\_name) | The name of the EKS cluster | `string` | `"my-eks-cluster"` | no |
-| <a name="input_private_subnets"></a> [private\_subnets](#input\_private\_subnets) | List of private subnet IDs for the EKS cluster | `list(string)` | n/a | yes |
-| <a name="input_tags"></a> [tags](#input\_tags) | A map of tags to apply to resources | `map(string)` | `{}` | no |
-| <a name="input_taint_effect"></a> [taint\_effect](#input\_taint\_effect) | The effect of the taint applied to the managed node group | `string` | `"NO_SCHEDULE"` | no |
-| <a name="input_taint_key"></a> [taint\_key](#input\_taint\_key) | The key for the taint applied to the managed node group | `string` | `"CriticalAddonsOnly"` | no |
-| <a name="input_taint_value"></a> [taint\_value](#input\_taint\_value) | The value for the taint applied to the managed node group | `string` | `"true"` | no |
-| <a name="input_vpc_id"></a> [vpc\_id](#input\_vpc\_id) | The VPC ID where the EKS cluster will be deployed | `string` | n/a | yes |
+| <a name="input_aws_auth_accounts"></a> [aws\_auth\_accounts](#input\_aws\_auth\_accounts) | AWS accounts for authentication | `list(string)` | `[]` | no |
+| <a name="input_aws_auth_roles"></a> [aws\_auth\_roles](#input\_aws\_auth\_roles) | AWS IAM roles for authentication | <pre>list(object({<br>    rolearn  = string<br>    username = string<br>    groups   = list(string)<br>  }))</pre> | `[]` | no |
+| <a name="input_aws_auth_users"></a> [aws\_auth\_users](#input\_aws\_auth\_users) | AWS IAM users for authentication | <pre>list(object({<br>    userarn  = string<br>    username = string<br>    groups   = list(string)<br>  }))</pre> | `[]` | no |
+| <a name="input_cloudwatch_log_group_retention_in_days"></a> [cloudwatch\_log\_group\_retention\_in\_days](#input\_cloudwatch\_log\_group\_retention\_in\_days) | CloudWatch log group retention in days | `number` | n/a | yes |
+| <a name="input_cluster_enabled_log_types"></a> [cluster\_enabled\_log\_types](#input\_cluster\_enabled\_log\_types) | List of cluster enabled log types | `list(string)` | n/a | yes |
+| <a name="input_cluster_name"></a> [cluster\_name](#input\_cluster\_name) | Name of the EKS cluster | `string` | n/a | yes |
+| <a name="input_cluster_service_ipv4_cidr"></a> [cluster\_service\_ipv4\_cidr](#input\_cluster\_service\_ipv4\_cidr) | Cluster service CIDR block | `string` | n/a | yes |
+| <a name="input_cluster_version"></a> [cluster\_version](#input\_cluster\_version) | EKS cluster version | `string` | n/a | yes |
+| <a name="input_coredns_version"></a> [coredns\_version](#input\_coredns\_version) | Version of the CoreDNS addon | `string` | n/a | yes |
+| <a name="input_create_iam_role"></a> [create\_iam\_role](#input\_create\_iam\_role) | Whether to create an IAM role for the EKS cluster | `bool` | n/a | yes |
+| <a name="input_ebs_csi_irsa_role_arn"></a> [ebs\_csi\_irsa\_role\_arn](#input\_ebs\_csi\_irsa\_role\_arn) | IAM role ARN for the EBS CSI driver | `string` | n/a | yes |
+| <a name="input_ebs_csi_version"></a> [ebs\_csi\_version](#input\_ebs\_csi\_version) | Version of the EBS CSI driver addon | `string` | n/a | yes |
+| <a name="input_iam_role_arn"></a> [iam\_role\_arn](#input\_iam\_role\_arn) | IAM role ARN if not creating a new one | `string` | n/a | yes |
+| <a name="input_kube_proxy_version"></a> [kube\_proxy\_version](#input\_kube\_proxy\_version) | Version of the kube-proxy addon | `string` | n/a | yes |
+| <a name="input_node_additional_security_group_rules"></a> [node\_additional\_security\_group\_rules](#input\_node\_additional\_security\_group\_rules) | Additional security group rules for nodes | <pre>map(object({<br>    description = string<br>    protocol    = string<br>    from_port   = number<br>    to_port     = number<br>    type        = string<br>    self        = bool<br>    cidr_blocks = list(string)<br>    ipv6_cidr_blocks = list(string)<br>  }))</pre> | `{}` | no |
+| <a name="input_subnet_ids"></a> [subnet\_ids](#input\_subnet\_ids) | List of subnet IDs for the EKS cluster | `list(string)` | n/a | yes |
+| <a name="input_vpc_cni_irsa_role_arn"></a> [vpc\_cni\_irsa\_role\_arn](#input\_vpc\_cni\_irsa\_role\_arn) | IAM role ARN for the VPC CNI | `string` | n/a | yes |
+| <a name="input_vpc_cni_version"></a> [vpc\_cni\_version](#input\_vpc\_cni\_version) | Version of the VPC CNI addon | `string` | n/a | yes |
+| <a name="input_vpc_id"></a> [vpc\_id](#input\_vpc\_id) | VPC ID where the EKS cluster will be deployed | `string` | n/a | yes |
 
 ## Outputs
 
