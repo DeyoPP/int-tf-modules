@@ -1,6 +1,6 @@
 module "karpenter" {
-  source = "terraform-aws-modules/eks/aws//modules/karpenter"
-
+  source = "git::https://github.com/terraform-aws-modules/terraform-aws-eks//modules/karpenter?ref=5fe865e860c4cc8506c639f2e63bc25e21a31b37"
+  
   cluster_name = var.cluster_name
 
   enable_pod_identity             = true
