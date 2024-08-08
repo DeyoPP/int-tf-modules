@@ -1,80 +1,115 @@
-variable "name" {
-  description = "The name of the EKS cluster"
+variable "cluster_name" {
+  description = "Name of the EKS cluster"
   type        = string
-  default     = "my-eks-cluster"
 }
 
 variable "cluster_version" {
-  description = "The Kubernetes version for the EKS cluster"
+  description = "EKS cluster version"
   type        = string
-  default     = "1.30"
 }
 
 variable "vpc_id" {
-  description = "The VPC ID where the EKS cluster will be deployed"
+  description = "VPC ID where the EKS cluster will be deployed"
   type        = string
 }
 
-variable "private_subnets" {
-  description = "List of private subnet IDs for the EKS cluster"
+variable "subnet_ids" {
+  description = "List of subnet IDs for the EKS cluster"
   type        = list(string)
 }
 
-variable "intra_subnets" {
-  description = "List of intra subnet IDs for the EKS cluster control plane"
+variable "cluster_service_ipv4_cidr" {
+  description = "Cluster service CIDR block"
+  type        = string
+}
+
+variable "aws_auth_roles" {
+  description = "AWS IAM roles for authentication"
+  type        = list(object({
+    rolearn  = string
+    username = string
+    groups   = list(string)
+  }))
+  default = []
+}
+
+variable "aws_auth_users" {
+  description = "AWS IAM users for authentication"
+  type        = list(object({
+    userarn  = string
+    username = string
+    groups   = list(string)
+  }))
+  default = []
+}
+
+variable "aws_auth_accounts" {
+  description = "AWS accounts for authentication"
+  type        = list(string)
+  default = []
+}
+
+variable "cloudwatch_log_group_retention_in_days" {
+  description = "CloudWatch log group retention in days"
+  type        = number
+}
+
+variable "cluster_enabled_log_types" {
+  description = "List of cluster enabled log types"
   type        = list(string)
 }
 
-variable "tags" {
-  description = "A map of tags to apply to resources"
-  type        = map(string)
-  default     = {}
+variable "node_additional_security_group_rules" {
+  description = "Additional security group rules for nodes"
+  type        = map(object({
+    description = string
+    protocol    = string
+    from_port   = number
+    to_port     = number
+    type        = string
+    self        = bool
+    cidr_blocks = list(string)
+    ipv6_cidr_blocks = list(string)
+  }))
+  default = {}
 }
 
-variable "ami_type" {
-  description = "The AMI type for the managed node group"
+variable "create_iam_role" {
+  description = "Whether to create an IAM role for the EKS cluster"
+  type        = bool
+}
+
+variable "iam_role_arn" {
+  description = "IAM role ARN if not creating a new one"
   type        = string
-  default     = "AL2023_x86_64_STANDARD"
 }
 
-variable "instance_types" {
-  description = "Comma-separated list of instance types for the managed node group"
+variable "ebs_csi_version" {
+  description = "Version of the EBS CSI driver addon"
   type        = string
-  default     = "t3.medium"
 }
 
-variable "min_size" {
-  description = "Minimum size of the managed node group"
-  type        = number
-  default     = 1
-}
-
-variable "max_size" {
-  description = "Maximum size of the managed node group"
-  type        = number
-  default     = 3
-}
-
-variable "desired_size" {
-  description = "Desired size of the managed node group"
-  type        = number
-  default     = 1
-}
-
-variable "taint_key" {
-  description = "The key for the taint applied to the managed node group"
+variable "ebs_csi_irsa_role_arn" {
+  description = "IAM role ARN for the EBS CSI driver"
   type        = string
-  default     = "CriticalAddonsOnly"
 }
 
-variable "taint_value" {
-  description = "The value for the taint applied to the managed node group"
+variable "vpc_cni_version" {
+  description = "Version of the VPC CNI addon"
   type        = string
-  default     = "true"
 }
 
-variable "taint_effect" {
-  description = "The effect of the taint applied to the managed node group"
+variable "vpc_cni_irsa_role_arn" {
+  description = "IAM role ARN for the VPC CNI"
   type        = string
-  default     = "NO_SCHEDULE"
+}
+
+variable "kube_proxy_version" {
+  description = "Version of the kube-proxy addon"
+  type        = string
+}
+
+variable "coredns_version" {
+  description = "Version of the CoreDNS addon"
+  type        = string
 }
