@@ -3,13 +3,8 @@ variable "cluster_name" {
   type        = string
 }
 
-variable "cluster_endpoint" {
-  description = "Endpoint of the EKS cluster"
-  type        = string
-}
-
-variable "aws_region" {
-  description = "AWS region where the EKS cluster is deployed"
-  type        = string
-  default     = "eu-central-1"
+variable "tags" {
+  description = "Tags to be applied to the resources."
+  type        = map(string)
+  default     = {}
 }

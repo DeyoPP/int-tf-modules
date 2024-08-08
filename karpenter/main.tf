@@ -1,114 +1,18 @@
-resource "aws_iam_role" "karpenter" {
-  name = "karpenter-controller"
+module "karpenter" {
+  source = "git::https://github.com/terraform-aws-modules/terraform-aws-eks//modules/karpenter?ref=5fe865e860c4cc8506c639f2e63bc25e21a31b37"
+  
+  cluster_name = var.cluster_name
 
-  assume_role_policy = jsonencode({
-    Version = "2012-10-17",
-    Statement = [{
-      Effect = "Allow",
-      Principal = {
-        Service = "ec2.amazonaws.com"
-      },
-      Action = "sts:AssumeRole"
-    }]
-  })
-}
+  enable_pod_identity             = true
+  create_pod_identity_association = true
 
-resource "aws_iam_role_policy" "karpenter" {
-  name = "karpenter-controller-policy"
-  role = aws_iam_role.karpenter.id
-
-  policy = jsonencode({
-    Version = "2012-10-17",
-    Statement = [
-      {
-        Effect = "Allow",
-        Action = [
-          "ec2:CreateLaunchTemplate",
-          "ec2:DeleteLaunchTemplate",
-          "ec2:RunInstances",
-          "ec2:TerminateInstances",
-          "ec2:DescribeLaunchTemplates",
-          "ec2:DescribeInstances",
-          "ec2:DescribeInstanceTypes",
-          "ec2:DescribeAvailabilityZones",
-          "ec2:DescribeSubnets",
-          "ec2:DescribeSecurityGroups",
-          "ec2:DescribeImages"
-        ],
-        Resource = "*"
-      },
-      {
-        Effect = "Allow",
-        Action = [
-          "iam:PassRole"
-        ],
-        Resource = "*"
-      }
-    ]
-  })
-}
-
-resource "aws_iam_instance_profile" "karpenter" {
-  name = "karpenter-instance-profile"
-  role = aws_iam_role.karpenter.name
-}
-
-resource "kubernetes_manifest" "karpenter_namespace" {
-  manifest = {
-    apiVersion = "v1"
-    kind       = "Namespace"
-    metadata = {
-      name = "karpenter"
-    }
+  node_iam_role_additional_policies = {
+    AmazonSSMManagedInstanceCore = "arn:aws:iam::aws:policy/AmazonSSMManagedInstanceCore",
+    AmazonEKSWorkerNodePolicy = "arn:aws:iam::aws:policy/AmazonEKSWorkerNodePolicy",
+    AmazonEC2FullAccess = "arn:aws:iam::aws:policy/AmazonEC2FullAccess",
+    AmazonEKS_CNI_Policy = "arn:aws:iam::aws:policy/AmazonEKS_CNI_Policy",
+    AmazonEKSClusterPolicy = "arn:aws:iam::aws:policy/AmazonEKSClusterPolicy"
   }
-}
 
-resource "kubernetes_manifest" "karpenter_service_account" {
-  manifest = {
-    apiVersion = "v1"
-    kind       = "ServiceAccount"
-    metadata = {
-      name      = "karpenter"
-      namespace = "karpenter"
-    }
-  }
-}
-
-resource "kubernetes_manifest" "karpenter_deployment" {
-  manifest = {
-    apiVersion = "apps/v1"
-    kind       = "Deployment"
-    metadata = {
-      name      = "karpenter"
-      namespace = "karpenter"
-    }
-    spec = {
-      replicas = 1
-      selector = {
-        matchLabels = {
-          app = "karpenter"
-        }
-      }
-      template = {
-        metadata = {
-          labels = {
-            app = "karpenter"
-          }
-        }
-        spec = {
-          serviceAccountName = "karpenter"
-          containers = [{
-            name  = "karpenter"
-            image = "public.ecr.aws/karpenter/karpenter:latest"
-            args  = [
-              "--cluster-name=${var.cluster_name}",
-              "--cluster-endpoint=${var.cluster_endpoint}",
-              "--aws-region=${var.aws_region}",
-              "--aws-instance-profile=${aws_iam_instance_profile.karpenter.name}"
-            ]
-          }]
-        }
-      }
-    }
-  }
+  tags = var.tags
 }
