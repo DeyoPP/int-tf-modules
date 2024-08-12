@@ -28,14 +28,14 @@ module "eks" {
       max_size     = 4
       desired_size = 2
 
-      taints = {
+      /*taints = {
 
         addons = {
           key    = "CriticalAddonsOnly"
           value  = "true"
           effect = "NO_SCHEDULE"
         },
-      }
+      }*/
     }
   }
   tags = var.tags
