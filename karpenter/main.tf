@@ -78,9 +78,8 @@ resource "kubectl_manifest" "karpenter_node_class" {
   ]
 }
 
-
 resource "kubectl_manifest" "karpenter_node_pool" {
-  yaml_body = file(var.karpenter_node_pool_config)
+  yaml_body = var.karpenter_node_pool_config
 
   depends_on = [
     kubectl_manifest.karpenter_node_class
