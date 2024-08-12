@@ -39,7 +39,6 @@ resource "helm_release" "karpenter" {
   ]
 }
 
-
 resource "kubectl_manifest" "karpenter_node_class" {
 
   yaml_body = <<-YAML
