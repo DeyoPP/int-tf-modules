@@ -25,7 +25,7 @@ variable "cluster_endpoint" {
 }
 
 variable "karpenter_node_pool_config" {
-  description = "Path to the YAML configuration for Karpenter Node Pool"
+  description = "YAML configuration for Karpenter Node Pool"
   type        = string
 }
 
