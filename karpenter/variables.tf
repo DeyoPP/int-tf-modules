@@ -28,3 +28,16 @@ variable "karpenter_node_pool_config" {
   description = "Path to the YAML configuration for Karpenter Node Pool"
   type        = string
 }
+
+
+variable "karpenter_version" {
+  description = "Version of the Karpenter Helm chart"
+  type        = string
+  default     = "0.37.0"  # Default version
+}
+
+variable "karpenter_namespace" {
+  description = "Namespace for Karpenter resources"
+  type        = string
+  default     = "kube-system"  # Default namespace
+}

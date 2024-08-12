@@ -18,14 +18,13 @@ module "karpenter" {
 }
 
 resource "helm_release" "karpenter" {
-
-  namespace           = "kube-system"
+  namespace           = var.karpenter_namespace
   name                = "karpenter"
   repository          = "oci://public.ecr.aws/karpenter"
-  repository_username = data.aws_ecrpublic_authorization_token.token.user_name
-  repository_password = data.aws_ecrpublic_authorization_token.token.password
+  repository_username = var.ecr_repo_username
+  repository_password = var.ecr_repo_password
   chart               = "karpenter"
-  version             = "0.37.0"
+  version             = var.karpenter_version
   wait                = false
 
   values = [
@@ -39,6 +38,7 @@ resource "helm_release" "karpenter" {
     EOT
   ]
 }
+
 
 resource "kubectl_manifest" "karpenter_node_class" {
 
