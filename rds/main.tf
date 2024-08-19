@@ -85,31 +85,24 @@ resource "aws_kms_key" "db_key" {
   enable_key_rotation     = true
 }
 
-resource "aws_secretsmanager_secret" "password_secret" {
+resource "aws_secretsmanager_secret" "db_credentials" {
   #checkov:skip=CKV2_AWS_57
   name                    = var.secret_name
   recovery_window_in_days = 30
   kms_key_id              = aws_kms_key.db_key.id
 }
 
+resource "aws_secretsmanager_secret_version" "db_credentials_value" {
+  secret_id     = aws_secretsmanager_secret.db_credentials.id
+  secret_string = jsonencode({
+    username = "dejo"
+    password = random_password.master_password.result
+    db_name  = "postgres"
+    host     = module.db.db_instance_address
+  })
+}
+
 resource "random_password" "master_password" {
   length  = 16
   special = var.password_special
-}
-
-resource "aws_secretsmanager_secret_version" "password_secret_value" {
-  secret_id     = aws_secretsmanager_secret.password_secret.id
-  secret_string = random_password.master_password.result
-}
-
-resource "aws_secretsmanager_secret" "username_secret" {
-  #checkov:skip=CKV2_AWS_57
-  name                    = "${var.secret_name}_username"
-  recovery_window_in_days = 30
-  kms_key_id              = aws_kms_key.db_key.id
-}
-
-resource "aws_secretsmanager_secret_version" "username_secret_value" {
-  secret_id     = aws_secretsmanager_secret.username_secret.id
-  secret_string = "dejo"
 }
