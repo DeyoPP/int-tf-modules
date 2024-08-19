@@ -79,30 +79,29 @@ module "security_group" {
 }
 
 resource "aws_kms_key" "db_key" {
-  #checkov:skip=CKV2_AWS_64
-  description             = "KMS key for AWS Secrets Manager"
+  description = "KMS key for AWS Secrets Manager"
   deletion_window_in_days = 7
-  enable_key_rotation     = true
+  enable_key_rotation = true
 }
 
 resource "aws_secretsmanager_secret" "db_credentials" {
-  #checkov:skip=CKV2_AWS_57
-  name                    = var.secret_name
+  name = var.secret_name
   recovery_window_in_days = 30
-  kms_key_id              = aws_kms_key.db_key.id
+  kms_key_id = aws_kms_key.db_key.id
 }
 
 resource "aws_secretsmanager_secret_version" "db_credentials_value" {
-  secret_id     = aws_secretsmanager_secret.db_credentials.id
+  secret_id = aws_secretsmanager_secret.db_credentials.id
   secret_string = jsonencode({
     username = "dejo"
     password = random_password.master_password.result
     db_name  = "postgres"
     host     = module.db.db_instance_address
+    port     = "5432"
   })
 }
 
 resource "random_password" "master_password" {
-  length  = 16
+  length = 16
   special = var.password_special
 }
