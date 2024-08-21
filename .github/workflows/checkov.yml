@@ -1,10 +1,16 @@
 name: Checkov
 
+permissions:
+  id-token: write
+  issues: write
+  pull-requests: write
+  contents: read
+
 on:
   pull_request:
     branches:
       - main
-permissions: read-all   
+
 jobs:
   checkov:
     name: Run Checkov
