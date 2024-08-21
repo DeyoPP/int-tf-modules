@@ -24,18 +24,18 @@ module "eks" {
       ami_type       = "AL2023_x86_64_STANDARD"
       instance_types = ["t3.medium"]
 
-      min_size     = 1
-      max_size     = 2
-      desired_size = 1
+      min_size     = 2
+      max_size     = 4
+      desired_size = 2
 
-      taints = {
+      /*taints = {
 
         addons = {
           key    = "CriticalAddonsOnly"
           value  = "true"
           effect = "NO_SCHEDULE"
         },
-      }
+      }*/
     }
   }
   tags = var.tags
