@@ -30,9 +30,9 @@ resource "kubernetes_service_account" "external_secrets_sa" {
 }
 
 resource "kubernetes_manifest" "secret_store" {
-  manifest = var.secret_store_manifest
+  manifest = yamldecode(var.secret_store_manifest)
 }
 
 resource "kubernetes_manifest" "external_secret" {
-  manifest = var.external_secret_manifest
+  manifest = yamldecode(var.external_secret_manifest)
 }
