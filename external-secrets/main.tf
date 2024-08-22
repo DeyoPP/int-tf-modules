@@ -1,38 +1,27 @@
-# Helm release resource
-resource "helm_release" "external_secrets" {
-  name       = var.external_secrets_name
-  repository = var.external_secrets_repository
-  chart      = var.external_secrets_chart
-  version    = var.external_secrets_version
 
-  namespace = var.namespace
-
-  set {
-    name  = "installCRDs"
-    value = var.install_crds
-  }
-
-  set {
-    name  = "serviceAccount.create"
-    value = var.service_account_create
-  }
+data "aws_secretsmanager_secret" "example" {
+  name = var.secret_name
 }
 
-# Kubernetes service account resource
-resource "kubernetes_service_account" "external_secrets_sa" {
+data "aws_secretsmanager_secret_version" "example" {
+  secret_id = data.aws_secretsmanager_secret.example.id
+}
+
+locals {
+  secret_data = jsondecode(data.aws_secretsmanager_secret_version.example.secret_string)
+}
+
+resource "kubernetes_secret" "external" {
   metadata {
-    name      = var.service_account_name
+    name      = var.secret_name
     namespace = var.namespace
-    annotations = {
-      "eks.amazonaws.com/role-arn" = var.role_arn
-    }
   }
-}
 
-resource "kubernetes_manifest" "secret_store" {
-  manifest = yamldecode(var.secret_store_manifest)
-}
-
-resource "kubernetes_manifest" "external_secret" {
-  manifest = yamldecode(var.external_secret_manifest)
+  data = {
+    db_host     = local.secret_data["host"]
+    db_port     = local.secret_data["port"]
+    db_name     = local.secret_data["db_name"]
+    db_user     = local.secret_data["username"]
+    db_password = local.secret_data["password"]
+  }
 }
