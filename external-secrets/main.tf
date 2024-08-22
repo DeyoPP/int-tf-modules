@@ -32,7 +32,7 @@ resource "kubernetes_service_account" "external_secrets_sa" {
 # Kubernetes manifest for SecretStore
 resource "kubernetes_manifest" "secret_store" {
   manifest = {
-    apiVersion = "external-secrets.io/v1alpha1"
+    apiVersion = "external-secrets.io/v1beta1"
     kind       = "SecretStore"
     metadata = {
       name      = var.secret_store_name
