@@ -1,0 +1,19 @@
+replicaCount: 2
+
+fullnameOverride: ${fullnameOverride}
+
+serviceAccount:
+  create: true
+  annotations: {
+    "eks.amazonaws.com/role-arn": ${serviceAccount_roleArn}
+  }
+  name: ${serviceAccount_name}
+
+resources: 
+  requests:
+    cpu: 10m
+    memory: 32Mi
+
+podDisruptionBudget:
+  enabled: true
+  minAvailable: 1
