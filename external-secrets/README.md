@@ -34,7 +34,7 @@ No modules.
 | <a name="input_external_secrets_repository"></a> [external\_secrets\_repository](#input\_external\_secrets\_repository) | n/a | `string` | `"https://charts.external-secrets.io"` | no |
 | <a name="input_external_secrets_version"></a> [external\_secrets\_version](#input\_external\_secrets\_version) | n/a | `string` | `"0.8.0"` | no |
 | <a name="input_install_crds"></a> [install\_crds](#input\_install\_crds) | n/a | `string` | `"true"` | no |
-| <a name="input_namespace"></a> [namespace](#input\_namespace) | n/a | `string` | `"default"` | no |
+| <a name="input_namespace"></a> [namespace](#input\_namespace) | n/a | `any` | n/a | yes |
 | <a name="input_postgres_db_property"></a> [postgres\_db\_property](#input\_postgres\_db\_property) | n/a | `string` | `"db_name"` | no |
 | <a name="input_postgres_host_property"></a> [postgres\_host\_property](#input\_postgres\_host\_property) | n/a | `string` | `"host"` | no |
 | <a name="input_postgres_password_property"></a> [postgres\_password\_property](#input\_postgres\_password\_property) | n/a | `string` | `"password"` | no |
