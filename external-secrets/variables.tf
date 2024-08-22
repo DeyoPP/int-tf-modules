@@ -1,11 +1,3 @@
-variable "meta" {
-  type = object({
-    owner       = string
-    basename    = string
-    environment = string
-  })
-}
-
 variable "chart_version" {
   type    = string
   default = "0.9.5"

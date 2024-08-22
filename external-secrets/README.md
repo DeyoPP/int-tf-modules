@@ -30,7 +30,6 @@ No requirements.
 |------|-------------|------|---------|:--------:|
 | <a name="input_chart_version"></a> [chart\_version](#input\_chart\_version) | n/a | `string` | `"0.9.5"` | no |
 | <a name="input_eks_oidc_provider_arn"></a> [eks\_oidc\_provider\_arn](#input\_eks\_oidc\_provider\_arn) | EKS Cluster oidc provider arn | `string` | n/a | yes |
-| <a name="input_meta"></a> [meta](#input\_meta) | n/a | <pre>object({<br>    owner       = string<br>    basename    = string<br>    environment = string<br>  })</pre> | n/a | yes |
 | <a name="input_service_account_name"></a> [service\_account\_name](#input\_service\_account\_name) | Name of the service account | `string` | n/a | yes |
 
 ## Outputs
