@@ -35,43 +35,12 @@ variable "role_arn" {
   default = "arn:aws:iam::976552365380:role/karpenter-eks-node-group-20240820074628272500000001"
 }
 
-variable "secret_store_name" {
-  default = "aws-secrets-manager"
+variable "secret_store_manifest" {
+  description = "YAML configuration for Secret Store"
+  type        = string
 }
 
-variable "aws_region" {
-  default = "eu-central-1"
+variable "external_secret_manifest" {
+  description = "YAML configuration for External Secrets"
+  type        = string
 }
-
-variable "external_secret_name" {
-  default = "my-external-secret"
-}
-
-variable "refresh_interval" {
-  default = "15m"
-}
-
-variable "remote_secret_key" {
-  default = "explorer_db_values"
-}
-
-variable "postgres_user_property" {
-  default = "username"
-}
-
-variable "postgres_password_property" {
-  default = "password"
-}
-
-variable "postgres_db_property" {
-  default = "db_name"
-}
-
-variable "postgres_host_property" {
-  default = "host"
-}
-
-variable "postgres_port_property" {
-  default = "port"
-}
-
