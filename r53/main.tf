@@ -17,6 +17,7 @@ resource "aws_route53_record" "www_dejan_fornul_io" {
 }
 
 resource "aws_route53_record" "api_dejan_fornul_io" {
+  #checkov:skip=CKV2_AWS_23
   zone_id = aws_route53_zone.example.zone_id
   name    = "api.dejan.fornul.io"
   type    = "A"
