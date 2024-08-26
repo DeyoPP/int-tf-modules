@@ -1,15 +1,14 @@
 replicaCount: 2
 
-fullnameOverride: ${fullnameOverride}
+fullnameOverride: external-secrets
 
 serviceAccount:
   create: true
-  annotations: {
+  annotations:
     "eks.amazonaws.com/role-arn": ${serviceAccount_roleArn}
-  }
   name: ${serviceAccount_name}
 
-resources: 
+resources:
   requests:
     cpu: 10m
     memory: 32Mi
