@@ -44,7 +44,8 @@ resource "helm_release" "external_secrets_resources" {
 }
 
 module "external_secret_service_account" {
-  source  = "terraform-aws-modules/iam/aws//modules/iam-role-for-service-accounts-eks"
+  source = "git::https://github.com/terraform-aws-modules/terraform-aws-iam//modules/iam-role-for-service-accounts-eks?ref=89fe17a6549728f1dc7e7a8f7b707486dfb45d89"
+
   version = "5.30.0"
 
   role_name                      = "external-secrets-role"
