@@ -49,3 +49,9 @@ variable "txt_prefix" {
   type        = string
   default     = "_external-dns"
 }
+
+variable "hosted_zone_id" {
+  description = "The ID of the Route 53 hosted zone"
+  type        = string
+  default     = ""
+}

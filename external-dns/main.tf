@@ -48,4 +48,9 @@ resource "helm_release" "external_dns" {
     name  = "txtPrefix"
     value = var.txt_prefix
   }
+
+  set {
+    name  = "aws.hostedZoneID"
+    value = var.hosted_zone_id
+  }
 }
