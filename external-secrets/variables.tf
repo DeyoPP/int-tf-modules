@@ -3,12 +3,12 @@ variable "chart_version" {
   default = "0.9.5"
 }
 
-variable "eks_oidc_provider_arn" {
+variable "aws_region" {
   type        = string
-  description = "EKS Cluster oidc provider arn"
+  description = "AWS region for the secrets"
 }
 
-variable "service_account_name" {
-  description = "Name of the service account"
+variable "eks_oidc_provider_arn" {
   type        = string
+  description = "EKS Cluster OIDC provider ARN"
 }
