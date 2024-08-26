@@ -35,4 +35,5 @@ No resources.
 | <a name="output_cluster_certificate_authority"></a> [cluster\_certificate\_authority](#output\_cluster\_certificate\_authority) | The base64 encoded certificate data required to communicate with the EKS cluster |
 | <a name="output_cluster_endpoint"></a> [cluster\_endpoint](#output\_cluster\_endpoint) | The endpoint for the EKS cluster |
 | <a name="output_cluster_name"></a> [cluster\_name](#output\_cluster\_name) | The name of the EKS cluster |
+| <a name="output_eks_oidc_arn"></a> [eks\_oidc\_arn](#output\_eks\_oidc\_arn) | The OIDC provider ARN for the EKS cluster |
 <!-- END_TF_DOCS -->
