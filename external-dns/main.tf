@@ -39,9 +39,9 @@ resource "helm_release" "external_dns" {
     value = var.domain_filter
   }
 
-  set {
+   set {
     name  = "sources"
-    value = var.sources
+    value = "{service,ingress}"
   }
 
   set {
