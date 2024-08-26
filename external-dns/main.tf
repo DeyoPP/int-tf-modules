@@ -39,13 +39,18 @@ resource "helm_release" "external_dns" {
     value = var.domain_filter
   }
 
-  set {
+   set {
     name  = "sources"
-    value = var.sources
+    value = "{service,ingress}"
   }
 
   set {
     name  = "txtPrefix"
     value = var.txt_prefix
+  }
+
+  set {
+    name  = "aws.hostedZoneID"
+    value = var.hosted_zone_id
   }
 }
