@@ -2,7 +2,7 @@ resource "helm_release" "external_dns" {
   name       = "external-dns"
   repository = "https://kubernetes-sigs.github.io/external-dns/"
   chart      = "external-dns"
-  namespace  = "kube-system"
+  namespace  = var.namespace
 
   set {
     name  = "provider"
@@ -11,17 +11,17 @@ resource "helm_release" "external_dns" {
 
   set {
     name  = "aws.zoneType"
-    value = "public"
+    value = var.zone_type
   }
 
   set {
     name  = "policy"
-    value = "upsert-only"  # Safe option, only updates or creates records
+    value = var.policy
   }
 
   set {
     name  = "registry"
-    value = "txt"
+    value = var.registry
   }
 
   set {
@@ -32,5 +32,20 @@ resource "helm_release" "external_dns" {
   set {
     name  = "txtOwnerId"
     value = var.cluster_name
+  }
+
+  set {
+    name  = "domainFilters[0]"
+    value = var.domain_filter
+  }
+
+  set {
+    name  = "sources"
+    value = var.sources
+  }
+
+  set {
+    name  = "txtPrefix"
+    value = var.txt_prefix
   }
 }
