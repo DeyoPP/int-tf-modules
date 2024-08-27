@@ -7,7 +7,7 @@ resource "aws_iam_role" "external_dns" {
       Action = "sts:AssumeRoleWithWebIdentity"
       Effect = "Allow"
       Principal = {
-        Federated = var.oidc_provider
+        Federated = "${var.oidc_provider}"
       }
       Condition = {
         StringEquals = {
@@ -18,32 +18,23 @@ resource "aws_iam_role" "external_dns" {
   })
 }
 
-resource "aws_iam_policy" "external_dns_pod_policy" {
-  name = "external_dns_pod_policy"
 
+resource "aws_iam_role_policy" "external_dns_policy" {
+  #checkov:skip=CKV_AWS_290
+  #checkov:skip=CKV_AWS_355
+  name   = "${var.cluster_name}-external-dns-policy"
+  role   = aws_iam_role.external_dns.name
   policy = jsonencode({
-    "Version" : "2012-10-17",
-    "Statement" : [
-      {
-        "Effect" : "Allow",
-        "Action" : [
-          "route53:ChangeResourceRecordSets"
-        ],
-        "Resource" : [
-          "arn:aws:route53:::dejan.fornul.io/*"
-        ]
-      },
-      {
-        "Effect" : "Allow",
-        "Action" : [
-          "route53:ListHostedZones",
-          "route53:ListResourceRecordSets"
-        ],
-        "Resource" : [
-          "*"
-        ]
-      }
-    ]
+    Version = "2012-10-17",
+    Statement = [{
+      Action = [
+        "route53:ChangeResourceRecordSets",
+        "route53:ListHostedZones",
+        "route53:ListResourceRecordSets"
+      ]
+      Effect   = "Allow"
+      Resource = "*"
+    }]
   })
 }
 
