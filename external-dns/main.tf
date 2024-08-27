@@ -13,8 +13,8 @@ resource "aws_iam_role" "external_dns" {
         "Action" : "sts:AssumeRoleWithWebIdentity",
         "Condition" : {
           "StringEquals" : {
-            "oidc.eks.${var.region}.amazonaws.com/id/${var.oidc_id}:sub" : "system:serviceaccount:${var.namespace}:external-dns",
-            "oidc.eks.${var.region}.amazonaws.com/id/${var.oidc_id}:aud" : "sts.amazonaws.com"
+            "${trimprefix(var.oidc_url, "https://")}:sub" : "system:serviceaccount:${var.namespace}:external-dns",
+            "${trimprefix(var.oidc_url, "https://")}:aud" : "sts.amazonaws.com"
           }
         }
       }
