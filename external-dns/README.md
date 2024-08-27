@@ -7,17 +7,25 @@ No requirements.
 
 | Name | Version |
 |------|---------|
+| <a name="provider_aws"></a> [aws](#provider\_aws) | n/a |
 | <a name="provider_helm"></a> [helm](#provider\_helm) | n/a |
+| <a name="provider_kubernetes"></a> [kubernetes](#provider\_kubernetes) | n/a |
 
 ## Modules
 
-No modules.
+| Name | Source | Version |
+|------|--------|---------|
+| <a name="module_eks_irsa"></a> [eks\_irsa](#module\_eks\_irsa) | terraform-aws-modules/iam-eks-role/aws | n/a |
 
 ## Resources
 
 | Name | Type |
 |------|------|
+| [aws_iam_role.external_dns_role](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/iam_role) | resource |
+| [aws_iam_role_policy.external_dns_policy](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/iam_role_policy) | resource |
+| [aws_iam_role_policy_attachment.external_dns_policy_attachment](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/iam_role_policy_attachment) | resource |
 | [helm_release.external_dns](https://registry.terraform.io/providers/hashicorp/helm/latest/docs/resources/release) | resource |
+| [kubernetes_service_account.external_dns](https://registry.terraform.io/providers/hashicorp/kubernetes/latest/docs/resources/service_account) | resource |
 
 ## Inputs
 
@@ -27,6 +35,7 @@ No modules.
 | <a name="input_domain_filter"></a> [domain\_filter](#input\_domain\_filter) | The domain filter for restricting DNS management to a specific domain | `string` | n/a | yes |
 | <a name="input_hosted_zone_id"></a> [hosted\_zone\_id](#input\_hosted\_zone\_id) | The ID of the Route 53 hosted zone | `string` | `""` | no |
 | <a name="input_namespace"></a> [namespace](#input\_namespace) | The Kubernetes namespace where the external-dns will be deployed | `string` | `"kube-system"` | no |
+| <a name="input_oidc_provider"></a> [oidc\_provider](#input\_oidc\_provider) | The OIDC provider ARN for the EKS cluster | `string` | `""` | no |
 | <a name="input_policy"></a> [policy](#input\_policy) | The policy for managing DNS records (e.g., upsert-only, sync) | `string` | `"upsert-only"` | no |
 | <a name="input_region"></a> [region](#input\_region) | The AWS region where the resources are located | `string` | `"eu-central-1"` | no |
 | <a name="input_registry"></a> [registry](#input\_registry) | The registry type for managing ownership (e.g., txt) | `string` | `"txt"` | no |
