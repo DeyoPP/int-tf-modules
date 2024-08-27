@@ -30,8 +30,8 @@ No modules.
 | <a name="input_domain_filter"></a> [domain\_filter](#input\_domain\_filter) | The domain filter for restricting DNS management to a specific domain | `string` | n/a | yes |
 | <a name="input_hosted_zone_id"></a> [hosted\_zone\_id](#input\_hosted\_zone\_id) | The ID of the Route 53 hosted zone | `string` | `""` | no |
 | <a name="input_namespace"></a> [namespace](#input\_namespace) | The Kubernetes namespace where the external-dns will be deployed | `string` | `"kube-system"` | no |
-| <a name="input_oidc_id"></a> [oidc\_id](#input\_oidc\_id) | The OIDC provider ID for the EKS cluster | `string` | `""` | no |
 | <a name="input_oidc_provider"></a> [oidc\_provider](#input\_oidc\_provider) | The OIDC provider ARN for the EKS cluster | `string` | `""` | no |
+| <a name="input_oidc_url"></a> [oidc\_url](#input\_oidc\_url) | The OIDC provider URL for the EKS cluster | `string` | `""` | no |
 | <a name="input_policy"></a> [policy](#input\_policy) | The policy for managing DNS records (e.g., upsert-only, sync) | `string` | `"upsert-only"` | no |
 | <a name="input_region"></a> [region](#input\_region) | The AWS region where the resources are located | `string` | `"eu-central-1"` | no |
 | <a name="input_registry"></a> [registry](#input\_registry) | The registry type for managing ownership (e.g., txt) | `string` | `"txt"` | no |
