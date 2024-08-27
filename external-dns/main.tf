@@ -97,13 +97,17 @@ resource "helm_release" "external_dns" {
     value = "true"
   }
 
+  # Set the Service Account name
   set {
     name  = "serviceAccount.name"
     value = "external-dns"
   }
 
+  # Set annotations using a map
   set {
-    name  = "serviceAccount.annotations.eks.amazonaws.com/role-arn"
-    value = aws_iam_role.external_dns.arn
+    name  = "serviceAccount.annotations"
+    value = jsonencode({
+      "eks.amazonaws.com/role-arn" = aws_iam_role.external_dns.arn
+    })
   }
 }
