@@ -116,6 +116,7 @@ resource "aws_iam_role_policy" "external_dns_policy" {
 }
 
 module "eks_irsa" {
+  #checkov:skip=CKV_TF_1: "No need to use commit hash, easier to track with version"
   source          = "terraform-aws-modules/iam-eks-role/aws"
   name            = "external-dns-irsa"
   service_account = "external-dns"
