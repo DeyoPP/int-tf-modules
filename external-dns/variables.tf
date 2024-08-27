@@ -61,3 +61,9 @@ variable "oidc_provider" {
   type = string
   default   = ""
 }
+
+variable "oidc_url" {
+  description = "The OIDC provider URL for the EKS cluster"
+  type = string
+  default   = ""
+}
