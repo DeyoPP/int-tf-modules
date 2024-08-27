@@ -7,7 +7,7 @@ resource "aws_iam_role" "external_dns" {
       Action = "sts:AssumeRoleWithWebIdentity"
       Effect = "Allow"
       Principal = {
-        Federated = var.oidc_provider
+        Federated = "${var.oidc_provider}"
       }
       Condition = {
         StringEquals = {
@@ -17,6 +17,7 @@ resource "aws_iam_role" "external_dns" {
     }]
   })
 }
+
 
 resource "aws_iam_role_policy" "external_dns_policy" {
   #checkov:skip=CKV_AWS_290
