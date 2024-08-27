@@ -13,13 +13,15 @@ resource "aws_iam_role" "external_dns" {
         "Action" : "sts:AssumeRoleWithWebIdentity",
         "Condition" : {
           "StringEquals" : {
-            "${var.oidc_provider}:sub" : "system:serviceaccount:${var.namespace}:external-dns"
+            "oidc.eks.${var.region}.amazonaws.com/id/${var.oidc_id}:sub" : "system:serviceaccount:${var.namespace}:external-dns",
+            "oidc.eks.${var.region}.amazonaws.com/id/${var.oidc_id}:aud" : "sts.amazonaws.com"
           }
         }
       }
     ]
   })
 }
+
 
 resource "aws_iam_role_policy" "external_dns_policy" {
   #checkov:skip=CKV_AWS_290
