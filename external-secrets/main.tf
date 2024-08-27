@@ -6,7 +6,7 @@ resource "helm_release" "external_secrets" {
   create_namespace = true
   chart            = "external-secrets"
 
-  values = [templatefile("values.tftpl", {
+  values = [templatefile("${path.module}/values.tftpl", {
     serviceAccount_roleArn = module.external_secret_service_account.iam_role_arn
     serviceAccount_name    = "external-secrets"
   })]

@@ -55,3 +55,9 @@ variable "hosted_zone_id" {
   type        = string
   default     = ""
 }
+
+variable "oidc_provider" {
+  description = "The OIDC provider ARN for the EKS cluster"
+  type = string
+  default   = ""
+}
