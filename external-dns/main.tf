@@ -18,22 +18,32 @@ resource "aws_iam_role" "external_dns" {
   })
 }
 
-resource "aws_iam_role_policy" "external_dns_policy" {
-  #checkov:skip=CKV_AWS_290
-  #checkov:skip=CKV_AWS_355
-  name   = "${var.cluster_name}-external-dns-policy"
-  role   = aws_iam_role.external_dns.name
+resource "aws_iam_policy" "external_dns_pod_policy" {
+  name = "external_dns_pod_policy"
+
   policy = jsonencode({
-    Version = "2012-10-17",
-    Statement = [{
-      Action = [
-        "route53:ChangeResourceRecordSets",
-        "route53:ListHostedZones",
-        "route53:ListResourceRecordSets"
-      ]
-      Effect   = "Allow"
-      Resource = "*"
-    }]
+    "Version" : "2012-10-17",
+    "Statement" : [
+      {
+        "Effect" : "Allow",
+        "Action" : [
+          "route53:ChangeResourceRecordSets"
+        ],
+        "Resource" : [
+          "arn:aws:route53:::dejan.fornul.io/*"
+        ]
+      },
+      {
+        "Effect" : "Allow",
+        "Action" : [
+          "route53:ListHostedZones",
+          "route53:ListResourceRecordSets"
+        ],
+        "Resource" : [
+          "*"
+        ]
+      }
+    ]
   })
 }
 
