@@ -1,28 +1,46 @@
-# Create IAM role and policy for ExternalDNS
 resource "aws_iam_role" "external_dns" {
   name = "${var.cluster_name}-external-dns"
 
   assume_role_policy = jsonencode({
-    Version = "2012-10-17",
-    Statement = [{
-      Action = "sts:AssumeRoleWithWebIdentity"
-      Effect = "Allow"
-      Principal = {
-        Federated = "${var.oidc_provider}"
-      }
-      Condition = {
-        StringEquals = {
-          "${var.oidc_provider}:sub" = "system:serviceaccount:${var.namespace}:external-dns"
+    "Version" : "2012-10-17",
+    "Statement" : [
+      {
+        "Effect" : "Allow",
+        "Principal" : {
+          "Federated" : "${var.oidc_provider}"
         },
-        StringLike = {
-          "${var.oidc_provider}:aud" = "sts.amazonaws.com"
+        "Action" : "sts:AssumeRoleWithWebIdentity",
+        "Condition" : {
+          "StringEquals" : {
+            "${var.oidc_provider}:sub" : "system:serviceaccount:${var.namespace}:external-dns"
+          }
         }
       }
-    }]
+    ]
   })
 }
 
+resource "aws_iam_role" "external_dns" {
+  name = "${var.cluster_name}-external-dns"
 
+  assume_role_policy = jsonencode({
+    "Version" : "2012-10-17",
+    "Statement" : [
+      {
+        "Effect" : "Allow",
+        "Principal" : {
+          "Federated" : "${var.oidc_provider}"
+        },
+        "Action" : "sts:AssumeRoleWithWebIdentity",
+        "Condition" : {
+          "StringEquals" : {
+            "${var.oidc_provider}:sub" : "system:serviceaccount:${var.namespace}:external-dns"
+          }
+        }
+      }
+    ]
+  })
+}
 
 resource "aws_iam_role_policy" "external_dns_policy" {
   #checkov:skip=CKV_AWS_290
