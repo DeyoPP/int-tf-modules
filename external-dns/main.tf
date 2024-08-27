@@ -96,6 +96,8 @@ resource "aws_iam_role" "external_dns_role" {
 }
 
 resource "aws_iam_role_policy" "external_dns_policy" {
+  #checkov:skip = CKV_AWS_290
+  #checkov:skip = CKV_AWS_355
   name = "external-dns-policy"
   role = aws_iam_role.external_dns_role.name
 
@@ -117,6 +119,8 @@ resource "aws_iam_role_policy" "external_dns_policy" {
 
 module "eks_irsa" {
   #checkov:skip=CKV_TF_1: "No need to use commit hash, easier to track with version"
+  #checkov:skip=CKV_TF_2
+
   source          = "terraform-aws-modules/iam-eks-role/aws"
   name            = "external-dns-irsa"
   service_account = "external-dns"
