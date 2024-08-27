@@ -106,7 +106,7 @@ resource "helm_release" "external_dns" {
 
   # it is highly recommended to enable webhook and certController according to: https://external-secrets.io/v0.8.0/api/components/
   set {
-    name  = "serviceAccount.annotations.eks.amazonaws.com/role-arn"
+    name  = "serviceAccount.annotations.eks\\.amazonaws\\.com/role-arn"
     value = aws_iam_role.external_dns.arn
   }
 
