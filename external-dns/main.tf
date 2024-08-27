@@ -1,6 +1,7 @@
 # Create IAM role and policy for ExternalDNS
 resource "aws_iam_role" "external_dns" {
   name = "${var.cluster_name}-external-dns"
+
   assume_role_policy = jsonencode({
     Version = "2012-10-17",
     Statement = [{
@@ -12,11 +13,15 @@ resource "aws_iam_role" "external_dns" {
       Condition = {
         StringEquals = {
           "${var.oidc_provider}:sub" = "system:serviceaccount:${var.namespace}:external-dns"
+        },
+        StringLike = {
+          "${var.oidc_provider}:aud" = "sts.amazonaws.com"
         }
       }
     }]
   })
 }
+
 
 
 resource "aws_iam_role_policy" "external_dns_policy" {
