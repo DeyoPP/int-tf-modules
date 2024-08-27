@@ -1,24 +1,3 @@
-resource "aws_iam_role" "external_dns" {
-  name = "${var.cluster_name}-external-dns"
-
-  assume_role_policy = jsonencode({
-    "Version" : "2012-10-17",
-    "Statement" : [
-      {
-        "Effect" : "Allow",
-        "Principal" : {
-          "Federated" : "${var.oidc_provider}"
-        },
-        "Action" : "sts:AssumeRoleWithWebIdentity",
-        "Condition" : {
-          "StringEquals" : {
-            "${var.oidc_provider}:sub" : "system:serviceaccount:${var.namespace}:external-dns"
-          }
-        }
-      }
-    ]
-  })
-}
 
 resource "aws_iam_role" "external_dns" {
   name = "${var.cluster_name}-external-dns"
