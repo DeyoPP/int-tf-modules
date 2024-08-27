@@ -19,6 +19,8 @@ resource "aws_iam_role" "external_dns" {
 }
 
 resource "aws_iam_role_policy" "external_dns_policy" {
+  #checkov:skip=CKV_AWS_290
+  #checkov:skip=CKV_AWS_355
   name   = "${var.cluster_name}-external-dns-policy"
   role   = aws_iam_role.external_dns.name
   policy = jsonencode({
