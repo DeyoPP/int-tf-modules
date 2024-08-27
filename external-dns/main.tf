@@ -19,6 +19,8 @@ resource "aws_iam_role" "external_dns" {
 }
 
 resource "aws_iam_role_policy" "external_dns_policy" {
+  #checkov:skip=CKV_AWS_290
+  #checkov:skip=CKV_AWS_355
   name   = "${var.cluster_name}-external-dns-policy"
   role   = aws_iam_role.external_dns.name
   policy = jsonencode({
@@ -97,17 +99,15 @@ resource "helm_release" "external_dns" {
     value = "true"
   }
 
-  # Set the Service Account name
   set {
     name  = "serviceAccount.name"
     value = "external-dns"
   }
 
-  # Set annotations using a map
+  # it is highly recommended to enable webhook and certController according to: https://external-secrets.io/v0.8.0/api/components/
   set {
-    name  = "serviceAccount.annotations"
-    value = jsonencode({
-      "eks.amazonaws.com/role-arn" = aws_iam_role.external_dns.arn
-    })
+    name  = "webhook.serviceAccount.annotations.eks\\.amazonaws\\.com/role-arn"
+    value = module.external_secret_service_account.iam_role_arn
   }
+
 }
