@@ -96,8 +96,8 @@ resource "aws_iam_role" "external_dns_role" {
 }
 
 resource "aws_iam_role_policy" "external_dns_policy" {
-  #checkov:skip = CKV_AWS_290
-  #checkov:skip = CKV_AWS_355
+  #checkov:skip=CKV_AWS_290
+  #checkov:skip=CKV_AWS_355
   name = "external-dns-policy"
   role = aws_iam_role.external_dns_role.name
 
