@@ -35,18 +35,7 @@ resource "aws_iam_role_policy" "external_dns_policy" {
   })
 }
 
-# Create the Kubernetes Service Account and link it to the IAM Role
-resource "kubernetes_service_account" "external_dns" {
-  metadata {
-    name      = "external-dns"
-    namespace = var.namespace
-    annotations = {
-      "eks.amazonaws.com/role-arn" = aws_iam_role.external_dns.arn
-    }
-  }
-}
-
-# Deploy the ExternalDNS Helm chart using the Service Account
+# Deploy the ExternalDNS Helm chart and let it create the Service Account
 resource "helm_release" "external_dns" {
   name       = "external-dns"
   repository = "https://kubernetes-sigs.github.io/external-dns/"
@@ -105,11 +94,16 @@ resource "helm_release" "external_dns" {
 
   set {
     name  = "serviceAccount.create"
-    value = "false"
+    value = "true"
   }
 
   set {
     name  = "serviceAccount.name"
-    value = kubernetes_service_account.external_dns.metadata[0].name
+    value = "external-dns"
+  }
+
+  set {
+    name  = "serviceAccount.annotations.eks.amazonaws.com/role-arn"
+    value = aws_iam_role.external_dns.arn
   }
 }
