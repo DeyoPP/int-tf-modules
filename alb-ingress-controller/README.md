@@ -9,7 +9,6 @@ No requirements.
 |------|---------|
 | <a name="provider_aws"></a> [aws](#provider\_aws) | n/a |
 | <a name="provider_helm"></a> [helm](#provider\_helm) | n/a |
-| <a name="provider_kubernetes"></a> [kubernetes](#provider\_kubernetes) | n/a |
 
 ## Modules
 
@@ -22,7 +21,6 @@ No modules.
 | [aws_iam_role.alb_ingress_controller](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/iam_role) | resource |
 | [aws_iam_role_policy.alb_ingress_controller_policy](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/iam_role_policy) | resource |
 | [helm_release.alb_ingress_controller](https://registry.terraform.io/providers/hashicorp/helm/latest/docs/resources/release) | resource |
-| [kubernetes_ingress.example](https://registry.terraform.io/providers/hashicorp/kubernetes/latest/docs/resources/ingress) | resource |
 
 ## Inputs
 
