@@ -77,45 +77,44 @@ resource "helm_release" "external_secrets" {
   }
 }
 
-resource "kubernetes_external_secret" "db_secrets" {
-  metadata {
-    name      = "db-secrets"
-    namespace = var.namespace
-  }
-
-  spec {
-    backend_type = "secretsManager"
-
-    data {
-      name = "POSTGRES_USER"
-      key  = "explorer_db_values"  # The key in AWS Secrets Manager
-      property = "username"  # Specify the property inside the JSON object
+resource "kubernetes_manifest" "db_secrets" {
+  manifest = {
+    apiVersion = "externalsecrets.io/v1alpha1"
+    kind       = "ExternalSecret"
+    metadata = {
+      name      = "db-secrets"
+      namespace = var.namespace
     }
-
-    data {
-      name = "POSTGRES_PASSWORD"
-      key  = "explorer_db_values"
-      property = "password"  # Specify the property inside the JSON object
+    spec = {
+      backendType = "secretsManager"
+      data = [
+        {
+          name     = "POSTGRES_USER"
+          key      = "explorer_db_values"  # The key in AWS Secrets Manager
+          property = "username"  # Property inside the JSON object
+        },
+        {
+          name     = "POSTGRES_PASSWORD"
+          key      = "explorer_db_values"
+          property = "password"  # Property inside the JSON object
+        },
+        {
+          name     = "POSTGRES_HOST"
+          key      = "explorer_db_values"
+          property = "host"  # Property inside the JSON object
+        },
+        {
+          name     = "POSTGRES_PORT"
+          key      = "explorer_db_values"
+          property = "port"  # Property inside the JSON object
+        },
+        {
+          name     = "POSTGRES_DB"
+          key      = "explorer_db_values"
+          property = "db_name"  # Property inside the JSON object
+        }
+      ]
+      refreshInterval = "1h"
     }
-
-    data {
-      name = "POSTGRES_HOST"
-      key  = "explorer_db_values"
-      property = "host"  # Specify the property inside the JSON object
-    }
-
-    data {
-      name = "POSTGRES_PORT"
-      key  = "explorer_db_values"
-      property = "port"  # Specify the property inside the JSON object
-    }
-
-    data {
-      name = "POSTGRES_DB"
-      key  = "explorer_db_values"
-      property = "db_name"  # Specify the property inside the JSON object
-    }
-
-    refresh_interval = "1h"
   }
 }
