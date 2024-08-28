@@ -1,27 +1,66 @@
-resource "helm_release" "external_secrets" {
-  version          = var.chart_version
-  repository       = "https://charts.external-secrets.io"
-  name             = "external-secrets"
-  namespace        = "kube-system"
-  create_namespace = true
-  chart            = "external-secrets"
+# IAM Role for External Secrets
+resource "aws_iam_role" "external_secrets" {
+  name = "${var.cluster_name}-external-secrets"
 
-  values = [templatefile("${path.module}/values.tftpl", {
-    serviceAccount_roleArn = module.external_secret_service_account.iam_role_arn
-    serviceAccount_name    = "external-secrets"
-  })]
-
-  set {
-    name  = "webhook.serviceAccount.annotations.eks\\.amazonaws\\.com/role-arn"
-    value = module.external_secret_service_account.iam_role_arn
-  }
+  assume_role_policy = jsonencode({
+    "Version" : "2012-10-17",
+    "Statement" : [
+      {
+        "Effect" : "Allow",
+        "Principal" : {
+          "Federated" : "${var.oidc_provider}"
+        },
+        "Action" : "sts:AssumeRoleWithWebIdentity",
+        "Condition" : {
+          "StringEquals" : {
+            "${var.oidc_url}:sub" : "system:serviceaccount:${var.namespace}:external-secrets",
+            "${var.oidc_url}:aud" : "sts.amazonaws.com"
+          }
+        }
+      }
+    ]
+  })
 }
 
-resource "helm_release" "external_secrets_resources" {
-  name      = "external-secrets-resources"
-  namespace = "kube-system"
+# IAM Policy for External Secrets
+resource "aws_iam_role_policy" "external_secrets_policy" {
+  name   = "${var.cluster_name}-external-secrets-policy"
+  role   = aws_iam_role.external_secrets.id
+  policy = jsonencode({
+    Version = "2012-10-17",
+    Statement = [{
+      Action = [
+        "secretsmanager:GetSecretValue",
+        "secretsmanager:ListSecrets",
+        "secretsmanager:DescribeSecret"
+      ],
+      Effect   = "Allow",
+      Resource = "*"
+    }]
+  })
+}
 
-  chart = "${path.module}/charts/external-secrets-resources"
+
+resource "helm_release" "external_secrets" {
+  name       = "external-secrets"
+  repository = "https://external-secrets.github.io/kubernetes-external-secrets/"
+  chart      = "kubernetes-external-secrets"
+  namespace  = var.namespace
+
+  set {
+    name  = "aws.secretsManager.enabled"
+    value = "true"
+  }
+
+  set {
+    name  = "aws.secretsManager.secretStore"
+    value = "aws-secrets-manager"
+  }
+
+  set {
+    name  = "serviceAccount.create"
+    value = "true"
+  }
 
   set {
     name  = "serviceAccount.name"
@@ -29,30 +68,50 @@ resource "helm_release" "external_secrets_resources" {
   }
 
   set {
-    name  = "serviceAccount.namespace"
-    value = "kube-system"
+    name  = "serviceAccount.annotations.eks\\.amazonaws\\.com/role-arn"
+    value = aws_iam_role.external_secrets.arn
   }
-
-  set {
-    name  = "region"
-    value = var.aws_region
-  }
-
-  depends_on = [
-    helm_release.external_secrets
-  ]
 }
 
-module "external_secret_service_account" {
-  source = "git::https://github.com/terraform-aws-modules/terraform-aws-iam//modules/iam-role-for-service-accounts-eks?ref=89fe17a6549728f1dc7e7a8f7b707486dfb45d89"
+resource "kubernetes_external_secret" "db_secrets" {
+  metadata {
+    name      = "db-secrets"
+    namespace = var.namespace
+  }
 
-  role_name                      = "external-secrets-role"
-  attach_external_secrets_policy = true
+  spec {
+    backend_type = "secretsManager"
 
-  oidc_providers = {
-    ex = {
-      provider_arn               = var.eks_oidc_provider_arn
-      namespace_service_accounts = ["kube-system:external-secrets"]
+    data {
+      name = "POSTGRES_USER"
+      key  = "explorer_db_values"  # The key in AWS Secrets Manager
+      property = "username"  # Specify the property inside the JSON object
     }
+
+    data {
+      name = "POSTGRES_PASSWORD"
+      key  = "explorer_db_values"
+      property = "password"  # Specify the property inside the JSON object
+    }
+
+    data {
+      name = "POSTGRES_HOST"
+      key  = "explorer_db_values"
+      property = "host"  # Specify the property inside the JSON object
+    }
+
+    data {
+      name = "POSTGRES_PORT"
+      key  = "explorer_db_values"
+      property = "port"  # Specify the property inside the JSON object
+    }
+
+    data {
+      name = "POSTGRES_DB"
+      key  = "explorer_db_values"
+      property = "db_name"  # Specify the property inside the JSON object
+    }
+
+    refresh_interval = "1h"
   }
 }

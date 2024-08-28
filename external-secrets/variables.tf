@@ -1,14 +1,22 @@
-variable "chart_version" {
-  type    = string
-  default = "0.9.5"
+variable "oidc_provider" {
+  description = "The OIDC provider ARN for the EKS cluster"
+  type = string
+  default   = ""
 }
 
-variable "aws_region" {
-  type        = string
-  description = "AWS region for the secrets"
+variable "oidc_url" {
+  description = "The OIDC provider URL for the EKS cluster"
+  type = string
+  default   = ""
 }
 
-variable "eks_oidc_provider_arn" {
+variable "cluster_name" {
+  description = "The name of the Kubernetes cluster"
   type        = string
-  description = "EKS Cluster OIDC provider ARN"
+}
+
+variable "namespace" {
+  description = "The Kubernetes namespace where the external-dns will be deployed"
+  type        = string
+  default     = "kube-system"
 }
