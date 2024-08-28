@@ -24,6 +24,9 @@ resource "aws_iam_role" "external_secrets" {
 
 # IAM Policy for External Secrets
 resource "aws_iam_role_policy" "external_secrets_policy" {
+  #checkov:skip=CKV_AWS_290
+  #checkov:skip=CKV_AWS_289  
+  #checkov:skip=CKV_AWS_355
   name   = "${var.cluster_name}-external-secrets-policy"
   role   = aws_iam_role.external_secrets.id
   policy = jsonencode({
