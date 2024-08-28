@@ -1,4 +1,3 @@
-
 resource "aws_iam_role" "external_dns" {
   name = "${var.cluster_name}-external-dns"
 
