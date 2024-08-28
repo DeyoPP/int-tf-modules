@@ -79,7 +79,7 @@ resource "helm_release" "external_secrets" {
 
 resource "kubernetes_manifest" "db_secrets" {
   manifest = {
-    apiVersion = "externalsecrets.io/v1alpha1"
+    apiVersion = "kubernetes-client.io/v1"
     kind       = "ExternalSecret"
     metadata = {
       name      = "db-secrets"
@@ -114,7 +114,7 @@ resource "kubernetes_manifest" "db_secrets" {
           property = "db_name"  # Property inside the JSON object
         }
       ]
-      refreshInterval = "1h"
     }
   }
+  depends_on = [ aws_iam_role.external_secrets, aws_iam_role_policy.external_secrets_policy, helm_release.external_secrets ]
 }
