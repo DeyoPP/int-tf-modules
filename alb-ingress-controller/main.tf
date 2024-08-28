@@ -99,3 +99,38 @@ resource "helm_release" "alb_ingress_controller" {
     value = aws_iam_role.alb_ingress_controller.arn
   }
 }
+
+resource "kubernetes_ingress" "example" {
+  metadata {
+    name      = "test-ingress"
+    namespace = var.namespace
+
+    annotations = {
+      "kubernetes.io/ingress.class"                         = "alb"
+      "external-dns.alpha.kubernetes.io/hostname"            = "api.dejan.fornul.io"
+      "alb.ingress.kubernetes.io/scheme"                     = "internet-facing" # Optional: use if you want an internet-facing ALB
+      "alb.ingress.kubernetes.io/target-type"                = "ip" # or "instance" based on your setup
+      "alb.ingress.kubernetes.io/healthcheck-path"           = "/" # Optional: specify health check path
+      "alb.ingress.kubernetes.io/healthcheck-interval"       = "30s" # Optional: specify health check interval
+    }
+  }
+
+  spec {
+    rule {
+      host = "api.dejan.fornul.io"
+
+      http {
+        path {
+          path = "/" # Specify the path to route traffic
+
+          backend {
+            service_name = "alb-ingress-controller" # Replace with the actual service name
+            service_port = 80                   # Replace with the actual service port
+          }
+        }
+      }
+    }
+  }
+  depends_on = [ helm_release.alb_ingress_controller ]
+}
+
