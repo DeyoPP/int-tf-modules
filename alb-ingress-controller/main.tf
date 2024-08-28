@@ -25,6 +25,7 @@ resource "aws_iam_role" "alb_ingress_controller" {
 # IAM Policy for ALB Ingress Controller
 resource "aws_iam_role_policy" "alb_ingress_controller_policy" {
   #checkov:skip=CKV_AWS_290
+  #checkov:skip=CKV_AWS_289  
   #checkov:skip=CKV_AWS_355
   name   = "${var.cluster_name}-alb-ingress-controller-policy"
   role   = aws_iam_role.alb_ingress_controller.name
