@@ -9,11 +9,12 @@ No requirements.
 |------|---------|
 | <a name="provider_aws"></a> [aws](#provider\_aws) | n/a |
 | <a name="provider_helm"></a> [helm](#provider\_helm) | n/a |
-| <a name="provider_kubernetes"></a> [kubernetes](#provider\_kubernetes) | n/a |
 
 ## Modules
 
-No modules.
+| Name | Source | Version |
+|------|--------|---------|
+| <a name="module_external_secret_service_account"></a> [external\_secret\_service\_account](#module\_external\_secret\_service\_account) | terraform-aws-modules/iam/aws//modules/iam-role-for-service-accounts-eks | 5.30.0 |
 
 ## Resources
 
@@ -22,7 +23,7 @@ No modules.
 | [aws_iam_role.external_secrets](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/iam_role) | resource |
 | [aws_iam_role_policy.external_secrets_policy](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/iam_role_policy) | resource |
 | [helm_release.external_secrets](https://registry.terraform.io/providers/hashicorp/helm/latest/docs/resources/release) | resource |
-| [kubernetes_manifest.db_secrets](https://registry.terraform.io/providers/hashicorp/kubernetes/latest/docs/resources/manifest) | resource |
+| [helm_release.external_secrets_resources](https://registry.terraform.io/providers/hashicorp/helm/latest/docs/resources/release) | resource |
 
 ## Inputs
 
