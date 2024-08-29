@@ -1,3 +1,8 @@
+variable "cluster_name" {
+  description = "The name of the Kubernetes cluster"
+  type        = string
+}
+
 variable "oidc_provider" {
   description = "The OIDC provider ARN for the EKS cluster"
   type = string
@@ -8,11 +13,6 @@ variable "oidc_url" {
   description = "The OIDC provider URL for the EKS cluster"
   type = string
   default   = ""
-}
-
-variable "cluster_name" {
-  description = "The name of the Kubernetes cluster"
-  type        = string
 }
 
 variable "namespace" {
