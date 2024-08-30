@@ -5,17 +5,19 @@ No requirements.
 
 ## Providers
 
-No providers.
+| Name | Version |
+|------|---------|
+| <a name="provider_helm"></a> [helm](#provider\_helm) | n/a |
 
 ## Modules
 
-| Name | Source | Version |
-|------|--------|---------|
-| <a name="module_argocd"></a> [argocd](#module\_argocd) | git::https://github.com/aigisuk/terraform-kubernetes-argocd | 2a9e1b910ba653f944a5a525029d0b7d648e413f |
+No modules.
 
 ## Resources
 
-No resources.
+| Name | Type |
+|------|------|
+| [helm_release.argocd](https://registry.terraform.io/providers/hashicorp/helm/latest/docs/resources/release) | resource |
 
 ## Inputs
 

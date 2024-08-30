@@ -1,12 +1,30 @@
-module "argocd" {
-  source = "git::https://github.com/aigisuk/terraform-kubernetes-argocd?ref=2a9e1b910ba653f944a5a525029d0b7d648e413f"
+resource "helm_release" "argocd" {
+  namespace        = var.namespace
+  create_namespace = true
+  name             = var.release_name
+  repository       = "https://argoproj.github.io/argo-helm"
+  chart            = "argo-cd"
+  version          = var.argocd_chart_version
 
-  release_name         = var.release_name
-  namespace            = var.namespace
-  argocd_chart_version = var.argocd_chart_version
-  timeout_seconds      = var.timeout_seconds
-  admin_password       = var.admin_password
-  values_file          = var.values_file
-  enable_dex           = var.enable_dex
-  insecure             = var.insecure
+  # Helm chart deployment can sometimes take longer than the default 5 minutes
+  timeout = var.timeout_seconds
+
+  # If values file specified by the var.values_file input variable exists then apply the values from this file
+  # else apply the default values from the chart
+  values = [fileexists("${path.root}/${var.values_file}") == true ? file("${path.root}/${var.values_file}") : ""]
+
+  set_sensitive {
+    name  = "configs.secret.argocdServerAdminPassword"
+    value = var.admin_password == "" ? "" : bcrypt(var.admin_password)
+  }
+
+  set {
+    name  = "configs.params.server\\.insecure"
+    value = var.insecure == false ? false : true
+  }
+
+  set {
+    name  = "dex.enabled"
+    value = var.enable_dex == true ? true : false
+  }
 }
