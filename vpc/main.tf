@@ -14,8 +14,11 @@ module "vpc" {
 
   azs                           = ["${local.region}a", "${local.region}b", "${local.region}c"]
   private_subnets               = var.private_subnets
+  private_subnet_tags           = var.private_subnet_tags
   public_subnets                = var.public_subnets
+  public_subnet_tags            = var.public_subnet_tags  
   database_subnets              = var.database_subnets
+  database_subnet_tags          = var.database_subnet_tags  
   manage_default_network_acl    = false
   manage_default_route_table    = false
   manage_default_security_group = false
