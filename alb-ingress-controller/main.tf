@@ -34,9 +34,12 @@ resource "aws_iam_role_policy" "alb_ingress_controller_policy" {
     Statement = [{
       Action = [
         "ec2:DescribeSubnets",
+        "ec2:DescribeAvailabilityZones",
+        "ec2:DescribeVpcs",      
         "ec2:DescribeSecurityGroups",
         "ec2:DescribeInstances",
         "ec2:DescribeNetworkInterfaces",
+        "ec2:DescribeRouteTables",
         "ec2:CreateTags",
         "ec2:DeleteTags",
         "elasticloadbalancing:*",

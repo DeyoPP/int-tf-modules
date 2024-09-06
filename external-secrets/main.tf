@@ -31,16 +31,27 @@ resource "aws_iam_role_policy" "external_secrets_policy" {
   role   = aws_iam_role.external_secrets.name
   policy = jsonencode({
     Version = "2012-10-17",
-    Statement = [{
-      Action = [
-        "secretsmanager:GetSecretValue",
-        "secretsmanager:DescribeSecret"
-      ]
-      Effect   = "Allow"
-      Resource = "*"
-    }]
+    Statement = [
+      {
+        Action = [
+          "secretsmanager:GetSecretValue",
+          "secretsmanager:DescribeSecret"
+        ],
+        Effect   = "Allow",
+        Resource = "*"
+      },
+      {
+        Action = [
+          "kms:Decrypt"
+        ],
+        Effect   = "Allow",
+        Resource = "*"
+      }
+    ]
   })
 }
+#
+
 
 resource "helm_release" "external_secrets" {
   repository       = "https://charts.external-secrets.io"
