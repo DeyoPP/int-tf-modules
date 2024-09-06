@@ -42,6 +42,7 @@ resource "aws_iam_role_policy" "alb_ingress_controller_policy" {
         "ec2:DescribeRouteTables",
         "ec2:CreateTags",
         "ec2:DeleteTags",
+        "ec2:CreateSecurityGroup",
         "elasticloadbalancing:*",
         "iam:ListServerCertificates",
         "iam:GetServerCertificate",
